@@ -57,3 +57,5 @@ else
 fi
 
 status "Tmux setup complete"
+
+echo -e "\e[1;32m[tmux] DONE\e[0m"

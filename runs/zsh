@@ -31,3 +31,4 @@ fi
 
 status "Zsh setup complete"
 
+echo -e "\e[1;32m[zsh] DONE\e[0m"

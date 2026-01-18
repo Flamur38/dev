@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-echo -e "\e[1;36m [installing i3]\e[0m"
+echo -e "\e[1;36m[installing i3]\e[0m"
 
 sudo apt install -y i3 i3-wm i3status xbacklight pavucontrol pulseaudio-utils rofi
 
 
 sudo mkdir -p /etc/htb/
 
+echo -e "\e[1;32m[i3 DONE]\e[0m"

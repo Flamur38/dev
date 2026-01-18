@@ -94,3 +94,4 @@ sudo snap install crackmapexec
 sudo snap install metasploit-framework
 log "Security tools installation completed"
 
+echo -e "\e[1;32m[security_tools] DONE\e[0m"

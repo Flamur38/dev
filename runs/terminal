@@ -102,3 +102,4 @@ sudo -u "$REAL_USER" \
 
 log "GNOME Terminal setup completed"
 
+echo -e "\e[1;32m[terminal] DONE\e[0m"

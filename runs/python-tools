@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo -e "\e[1;36m [python-tools] Installing Python CLI tools via pipx\e[0m"
+echo -e "\e[1;36m[python-tools] Installing Python CLI tools via pipx\e[0m"
 
 if ! command -v pipx >/dev/null 2>&1; then
     echo "[python-tools] Installing pipx"

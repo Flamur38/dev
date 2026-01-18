@@ -73,3 +73,5 @@ if ! fc-list | grep -q "JetBrainsMono Nerd"; then
     unzip -o NerdFontsSymbolsOnly.zip
     fc-cache -fv
 fi
+
+echo -e "\e[1;32m[dev DONE]\e[0m"

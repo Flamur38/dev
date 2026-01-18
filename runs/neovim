@@ -78,3 +78,4 @@ nvim --version | head -n1
 
 log "Neovim build complete"
 
+echo -e "\e[1;32m[neovim DONE]\e[0m"

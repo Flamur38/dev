@@ -12,13 +12,13 @@ status() {
 status "Installing zsh"
 sudo apt install -y zsh
 
-# 2. Set zsh as default shell (only if not already)
-if [[ "$SHELL" != "$(which zsh)" ]]; then
-    status "Setting zsh as default shell"
-    sudo chsh -s "$(which zsh)" "$USER"
-else
-    status "zsh already default shell"
-fi
+# # 2. Set zsh as default shell (only if not already)
+# if [[ "$SHELL" != "$(which zsh)" ]]; then
+#     status "Setting zsh as default shell"
+#     sudo chsh -s "$(which zsh)" "$USER"
+# else
+#     status "zsh already default shell"
+# fi
 
 # 3. Install Oh My Zsh (non-interactive, idempotent)
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then

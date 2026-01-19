@@ -54,7 +54,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-  # Orginal PS1:
   # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 # PS1='\[\033[0;34m\]┌──(\[\033[1;31m\]\u@\h\[\033[0;34m\])-[\[\033[1;38;5;231m\]\w\[\033[0;34m\]]\n└─\[\033[0;31m\]\[\033[1;31m\]\$\[\033[0m\] '
 
@@ -72,14 +71,15 @@ git_ps1() {
 
   if git diff --quiet 2>/dev/null; then
     # Prints the branch with color coding, no wrapping needed here
-    printf "${blue}-[${green}${branch}${blue}]${reset}"
+    printf "${blue} (${green}${branch}${blue})${reset}"
   else
     # Prints the branch with "*" if changes are pending
-    printf "${blue}-[${red}${branch}*${blue}]${reset}"
+    printf "${blue} (${red}${branch}*${blue})${reset}"
   fi
 }
-PS1="\[\033[0;34m\]┌──(\[\033[1;31m\]\u@\h\[\033[0;34m\])-[\[\033[1;38;5;231m\]\w\[\033[0;34m\]]\[\$(git_ps1)\]\n\[\033[0;34m\]└─\[\033[1;31m\]\$\[\033[0m\] "
+# PS1="\[\033[0;34m\]┌──(\[\033[1;31m\]\u@\h\[\033[0;34m\])-[\[\033[1;38;5;231m\]\w\[\033[0;34m\]]\[\$(git_ps1)\]\n\[\033[0;34m\]└─\[\033[1;31m\]\$\[\033[0m\] "
 
+PS1="\[\033[38;2;197;244;103m\][\[\033[0;37m\]\@\[ \[\033[0;34m\]@\h\[\033[38;2;197;244;103m\]]-[\[\033[1;37m\]\w\[\033[38;2;197;244;103m\]]\[\$(git_ps1)\]\n\[\033[38;2;197;244;103m\]>>> \$\[\033[0m\] "
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '

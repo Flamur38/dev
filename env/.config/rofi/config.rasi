@@ -1,114 +1,97 @@
-/* =================================
-   Ubuntu 25.10 – Clean Dark Rofi
-   ================================= */
+/* ==========================================================
+ * ROFI — SOC / IR MINIMAL THEME
+ * Matches terminal, tmux, PS1
+ * ========================================================== */
 
 * {
-    font: "Ubuntu 23";
+    bg:            #0B1220;   /* window background */
+    bg-alt:        #111827;   /* list rows (still dark!) */
 
-    bg:        #1E1E1E;  /* Main background */
-    bg-alt:    #2A2A2A;  /* Input bar background */
+    fg:            #E6EDF3;   /* main text */
+    fg-muted:      #C0CAF5;   /* list item text */
 
-    fg:        #EDEDED;  /* Selected text */
-    fg-muted:  #C5C8C6;  /* Normal list text */
+    selection:     #38BDF8;
+    border:        #1F2933;
+    alert:         #EF4444;
 
-    accent:    #E95420;  /* Ubuntu orange */
-    accent-2:  #77216F;  /* Ubuntu aubergine */
-
-    border:    #3A3A3A;
+    font: "JetBrains Mono 30";
 }
 
-/* -------------------------------
-   Window
--------------------------------- */
+/* ----------------------------------------------------------
+ * Window
+ * ---------------------------------------------------------- */
 window {
-    location: center;
-    width: 1850px;
-    border-radius: 14px;
-    background-color: @bg;
+    width: 40%;
+    padding: 20px;
     border: 2px;
-    border-color: @accent-2;
+    border-color: @border;
+    background-color: @bg;
+    location: center;
 }
 
-/* -------------------------------
-   Input bar
--------------------------------- */
+/* ----------------------------------------------------------
+ * Input bar
+ * ---------------------------------------------------------- */
 inputbar {
-    padding: 14px;
+    padding: 8px 10px;
     spacing: 10px;
     background-color: @bg-alt;
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 prompt {
-    text-color: @accent;
-    font: "Ubuntu Bold 23";
+    text-color: @fg-muted;
 }
 
 entry {
     text-color: @fg;
-    placeholder: "Search…";
-    placeholder-color: @fg-muted;
 }
 
-/* -------------------------------
-   List view (uniform background)
--------------------------------- */
+/* ----------------------------------------------------------
+ * List view
+ * ---------------------------------------------------------- */
 listview {
-    padding: 10px;
+    lines: 8;
     spacing: 6px;
+    padding: 10px 0px;
     background-color: @bg;
 }
 
-/* -------------------------------
-   List elements
--------------------------------- */
-element {
-    padding: 12px 18px;
-    border-radius: 8px;
-    background-color: @bg;
-}
-
-/* Normal rows */
-element normal.normal {
-    background-color: @bg;
-    text-color: @fg-muted;
-}
-
-/* Selected row */
-element selected.normal {
-    background-color: @accent-2;
-    text-color: #FFFFFF;
-}
-
-/* Selected + active (Enter target) */
-element selected.active {
-    background-color: @accent;
-    text-color: #FFFFFF;
-}
-
-/* Ensure text always follows element */
-element-text {
-    background-color: inherit;
-    text-color: inherit;
-}
-
-/* -------------------------------
-   Scrollbar
--------------------------------- */
-scrollbar {
-    width: 6px;
-    handle-color: @accent-2;
-    handle-width: 6px;
-    background-color: transparent;
-}
-
-/* -------------------------------
-   Message area
--------------------------------- */
-message {
-    padding: 12px;
-    border-radius: 8px;
+/* ----------------------------------------------------------
+ * Elements — dark, uniform, no zebra
+ * ---------------------------------------------------------- */
+element,
+element normal,
+element alternate,
+element active,
+element urgent {
     background-color: @bg-alt;
     text-color: @fg-muted;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+element selected,
+element selected.normal,
+element selected.alternate {
+    background-color: @selection;
+    text-color: @bg;
+}
+
+element urgent.selected {
+    background-color: @selection;
+    text-color: @bg;
+}
+
+/* ----------------------------------------------------------
+ * Message / error
+ * ---------------------------------------------------------- */
+message {
+    background-color: @bg-alt;
+    padding: 10px;
+}
+
+textbox {
+    text-color: @alert;
 }
 

@@ -21,23 +21,5 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-
-# ===============================
-# Git quick update
-# ===============================
-gup() {
-    branch=$(git branch --show-current)
-
-    echo
-    git status --short
-    echo
-
-    git add .
-    git commit -m "${1:-updated}" || {
-        echo "Nothing to commit"
-        return
-    }
-
-    git push origin "$branch"
-}
-
+# ---- common ----
+alias vi='nvim'

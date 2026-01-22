@@ -143,11 +143,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# Common aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias vi='nvim'
 
 # Notify on long-running commands
 alias alert='notify-send --urgency=low \

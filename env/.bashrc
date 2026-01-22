@@ -173,6 +173,26 @@ fi
 # Case-insensitive tab completion
 bind 'set completion-ignore-case on'
 
+# ===============================
+# Git quick update
+# ===============================
+gup() {
+    branch=$(git branch --show-current)
+
+    echo
+    git status --short
+    echo
+
+    git add .
+    git commit -m "${1:-updated}" || {
+        echo "Nothing to commit"
+        return
+    }
+
+    git push origin "$branch"
+}
+
+
 # ==========================================================
 # PROMPT COMMAND
 # ==========================================================

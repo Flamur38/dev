@@ -92,6 +92,7 @@ sudo snap install volatility-phocean
 sudo snap install autopsy
 sudo snap install crackmapexec
 sudo snap install metasploit-framework
+sudo snap install powershell 
 log "Security tools installation completed"
 
 echo -e "\e[1;32m[security_tools] DONE\e[0m"

@@ -58,7 +58,8 @@ sudo apt install -y \
   htop \
   lsof \
   strace \
-  inotify-tools
+  inotify-tools \
+  wireshark
 
 # ----------------------------------------
 # Pentesting tools (CLI)

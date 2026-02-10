@@ -7,7 +7,7 @@
 # ==========================================================
 
 set $modkey Mod1
-font pango:JetBrains Mono 25
+font pango:Monospace 25
 floating_modifier $modkey
 
 # ==========================================================
@@ -153,7 +153,7 @@ bar {
     status_command i3status -c ~/.config/i3status/config
     position top
     strip_workspace_numbers yes
-    font pango:JetBrains Mono 25
+    font pango:Monospace 25
 
     colors {
         background  $bg

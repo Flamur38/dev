@@ -115,7 +115,7 @@ if [ "$color_prompt" = yes ]; then
     PS1='$(ps1_ssh)$(ps1_root)\
 \[\033[1;34m\]@\h \
 \[\033[38;2;100;116;139m\]:: \
-\[\033[38;2;230;237;243m\]\w$(git_ps1)\
+\[\033[0;37m\]\w$(git_ps1)\
 \n$(ps1_exit)$(ps1_symbol)'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '

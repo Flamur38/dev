@@ -94,6 +94,7 @@ sync_tree "$DEV_ENV/env/.local" "$HOME/.local"
 
 # Copy folder
 sync_tree "$DEV_ENV/env/pictures" "$HOME/Pictures"
+sync_tree "$DEV_ENV/env/Tools" "$HOME/Tools"
 
 # Copy shell & profile files
 # copy_file "$DEV_ENV/env/.zsh_profile" "$HOME/.zsh_profile"

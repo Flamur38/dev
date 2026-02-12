@@ -59,7 +59,8 @@ sudo apt install -y \
   lsof \
   strace \
   inotify-tools \
-  wireshark
+  wireshark \
+  snort
 
 # ----------------------------------------
 # Pentesting tools (CLI)

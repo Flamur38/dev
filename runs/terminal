@@ -13,8 +13,8 @@ log() {
 REAL_USER="${SUDO_USER:-$USER}"
 REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 
-# One profile only
-JULIANA_UUID="3b7a1d5c-3c7a-4f0b-b4d0-2a1a6a6f2d11"
+FLAMY_UUID="b1e3e5d0-ffaf-4b77-9a44-7f9c3b0a7f10"
+INCIDENT_UUID="c7d9f0f2-9c33-4c3e-9b63-3f63a3c55c44"
 
 # ------------------------------------------
 # Resolve repo paths
@@ -24,17 +24,20 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CONF_DIR="$REPO_ROOT/env/.config/terminal"
 
 # ------------------------------------------
-# Sanity check profile file
+# Sanity check profile files
 # ------------------------------------------
-[[ -f "$CONF_DIR/juliana-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/juliana-profile.conf"; exit 1; }
+[[ -f "$CONF_DIR/flamy-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/flamy-profile.conf"; exit 1; }
+[[ -f "$CONF_DIR/incident-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/incident-profile.conf"; exit 1; }
 
 # ------------------------------------------
-# Install packages (keep what your script needs)
+# Install packages
 # ------------------------------------------
-log "Installing GNOME Terminal and dbus-x11"
+log "Installing GNOME Terminal, fonts, and dbus-x11"
 sudo apt update
 sudo apt install -y \
   gnome-terminal \
+  fonts-jetbrains-mono \
+  fonts-hack \
   dbus-x11
 
 # ------------------------------------------
@@ -45,51 +48,58 @@ sudo -u "$REAL_USER" mkdir -p "$REAL_HOME/.config"
 sudo chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config"
 
 # ------------------------------------------
-# Register GNOME Terminal profile (single)
+# Register GNOME Terminal profiles
 # ------------------------------------------
-log "Registering GNOME Terminal profile (Juliana)"
+log "Registering GNOME Terminal profiles"
 sudo -u "$REAL_USER" \
   HOME="$REAL_HOME" USER="$REAL_USER" \
   dbus-launch dconf write \
   /org/gnome/terminal/legacy/profiles:/list \
-  "[ '$JULIANA_UUID' ]"
+  "[ '$FLAMY_UUID', '$INCIDENT_UUID' ]"
 
 # ------------------------------------------
-# Set default profile (Juliana)
+# Set default profile (flamy)
 # ------------------------------------------
-log "Setting Juliana as default profile"
+log "Setting flamy as default profile"
 sudo -u "$REAL_USER" \
   HOME="$REAL_HOME" USER="$REAL_USER" \
   dbus-launch dconf write \
   /org/gnome/terminal/legacy/profiles:/default \
-  "'$JULIANA_UUID'"
+  "'$FLAMY_UUID'"
 
 # ------------------------------------------
-# Load profile config
+# Load profile configs
 # ------------------------------------------
-log "Loading Juliana profile"
+log "Loading flamy profile"
 sudo -u "$REAL_USER" \
   HOME="$REAL_HOME" USER="$REAL_USER" \
   dbus-launch dconf load \
-  "/org/gnome/terminal/legacy/profiles:/:$JULIANA_UUID/" \
-  < "$CONF_DIR/juliana-profile.conf"
+  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/" \
+  < "$CONF_DIR/flamy-profile.conf"
+
+log "Loading incident profile"
+sudo -u "$REAL_USER" \
+  HOME="$REAL_HOME" USER="$REAL_USER" \
+  dbus-launch dconf load \
+  "/org/gnome/terminal/legacy/profiles:/:$INCIDENT_UUID/" \
+  < "$CONF_DIR/incident-profile.conf"
 
 # ------------------------------------------
-# Force font (optional, but keeps it consistent)
+# Set Hack as default font for flamy profile
 # ------------------------------------------
-log "Setting terminal font (Hack 18)"
+log "Setting Hack as default terminal font"
 sudo -u "$REAL_USER" \
   HOME="$REAL_HOME" USER="$REAL_USER" \
   dbus-launch dconf write \
-  "/org/gnome/terminal/legacy/profiles:/:$JULIANA_UUID/font" \
-  "'Hack 18'"
+  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/font" \
+  "'Hack 15'"
 
 sudo -u "$REAL_USER" \
   HOME="$REAL_HOME" USER="$REAL_USER" \
   dbus-launch dconf write \
-  "/org/gnome/terminal/legacy/profiles:/:$JULIANA_UUID/use-system-font" \
+  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/use-system-font" \
   "false"
 
 log "GNOME Terminal setup completed"
-echo -e "\e[1;32m[terminal] DONE\e[0m"
 
+echo -e "\e[1;32m[terminal] DONE\e[0m"

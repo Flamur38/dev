@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# Run this script before running the ./run 
+
 set -e
 
 echo "[+] Updating system"

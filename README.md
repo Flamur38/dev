@@ -38,7 +38,7 @@ A modular, portable Bash-based development environment setup. This project helps
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Clone the repo:
 
@@ -70,13 +70,13 @@ chmod +x runs/*
 
 ## 📦 Coming Soon
 
-- 🐧 Setup scripts for GNOME, XFCE
-- 🧰 Optional install flags
-- 🧪 Testing in Docker.
+- Setup scripts for GNOME, XFCE
+- Optional install flags
+- Testing in Docker.
 
 ---
 
-## 📜 License
+## License
 
 MIT — do whatever you want, just don’t blame me if it breaks stuff. 😄
 

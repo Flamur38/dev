@@ -27,8 +27,8 @@ cat > "$CFG_FILE" <<'EOF'
     use_system_font = False
 
     # Sublime Juliana-ish palette
-    background_color = "#000000"
-    foreground_color = "#d8dee9"
+    background_color = "#a4b1cd"
+    foreground_color = "#101927"
     cursor_color = "#fac761"
     selection_color = "#3f4750"
 

@@ -1,4 +1,4 @@
-# ~/.bashrc — user (flamy)
+# ~/bashrc — user (flamy)
 # Executed by bash for interactive non-login shells
 # Goal: clean, minimal, SOC / IR–friendly environment
 
@@ -21,8 +21,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # History size
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTTIMEFORMAT="%F %T "
 
 # ==========================================================
 # SHELL BEHAVIOR
@@ -60,68 +61,160 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 # ==========================================================
-# PROMPT HELPERS (SOC / IR AWARENESS)
+# JULIANA PS1 — Hacker / SOC
 # ==========================================================
 
-# --- Git prompt helper (clean / dirty, user only) ---
-git_ps1() {
-  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+# --- Juliana color palette ---
+__JL_TIME='\033[38;2;70;82;92m'         # #46525c — muted / time
+__JL_HOST='\033[0;32m'      # #95b2d6 — blue1 — hostname
+__JL_HOST_ROOT='\033[38;2;236;95;102m'  # #ec5f66 — red — hostname when root
+__JL_PATH='\033[1;34m'      # #d8dee9 — fg2 — path
+__JL_SEP='\033[38;2;70;82;92m'          # #46525c — separators / brackets
+__JL_GIT_CLEAN='\033[38;2;153;199;148m' # #99c794 — green — clean branch
+__JL_GIT_DIRTY='\033[38;2;236;95;102m'  # #ec5f66 — red — dirty branch
+__JL_SSH='\033[38;2;249;174;88m'        # #f9ae58 — yellow — ssh indicator
+__JL_ROOT='\033[38;2;236;95;102m'       # #ec5f66 — red — root indicator
+__JL_SYMBOL='\033[38;2;236;95;102m'     # #ec5f66 — red — ❯
+__JL_EXIT='\033[38;2;236;95;102m'       # #ec5f66 — red — exit code
+__JL_RESET='\033[0m'
 
-  local branch
-  branch="$(git branch --show-current 2>/dev/null)"
-  [ -z "$branch" ] && branch="detached:$(git rev-parse --short HEAD 2>/dev/null)"
+# --- Git branch + dirty status ---
+__jl_git() {
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
 
-  local gray='\033[38;2;100;116;139m'   # structure
-  local teal='\033[38;2;45;212;191m'    # clean
-  local red='\033[38;2;239;68;68m'      # dirty
-  local reset='\033[0m'
+    local branch
+    branch="$(git branch --show-current 2>/dev/null)"
+    [ -z "$branch" ] && branch="detached:$(git rev-parse --short HEAD 2>/dev/null)"
 
-  if git diff --quiet && git diff --cached --quiet; then
-    printf "%b (%b%s%b)%b" "$gray" "$teal" "$branch" "$gray" "$reset"
-  else
-    printf "%b (%b%s*%b)%b" "$gray" "$red" "$branch" "$gray" "$reset"
-  fi
+    if git diff --quiet && git diff --cached --quiet; then
+        printf "%b [%b%s%b]%b" \
+            "$__JL_SEP" "$__JL_GIT_CLEAN" "$branch" "$__JL_SEP" "$__JL_RESET"
+    else
+        printf "%b [%b%s*%b]%b" \
+            "$__JL_SEP" "$__JL_GIT_DIRTY" "$branch" "$__JL_SEP" "$__JL_RESET"
+    fi
 }
 
 # --- SSH indicator ---
-ps1_ssh() {
-  [ -n "$SSH_CONNECTION" ] && printf "\033[38;2;250;204;21m[ssh]\033[0m "
+__jl_ssh() {
+    [ -n "$SSH_CONNECTION" ] && \
+        printf "%b[ssh]%b · " "$__JL_SSH" "$__JL_SEP"
 }
 
-# --- Root indicator (user shell still detects it safely) ---
-ps1_root() {
-  [ "$EUID" -eq 0 ] && printf "\033[38;2;239;68;68m[root]\033[0m "
+# --- Root indicator ---
+__jl_root() {
+    [ "$EUID" -eq 0 ] && \
+        printf "%b[root]%b · " "$__JL_ROOT" "$__JL_SEP"
 }
 
-# --- Prompt symbol ($ vs #) ---
-ps1_symbol() {
-  if [ "$EUID" -eq 0 ]; then
-    printf "\033[38;2;239;68;68m#\033[0m "
-  else
-    printf "\033[38;2;239;68;68m$\033[0m "
-  fi
+# --- Hostname (red if root, uses $HOSTNAME not \h) ---
+__jl_host() {
+    if [ "$EUID" -eq 0 ]; then
+        printf "%b%s%b" "$__JL_HOST_ROOT" "${HOSTNAME%%.*}" "$__JL_RESET"
+    else
+        printf "%b%s%b" "$__JL_HOST" "${HOSTNAME%%.*}" "$__JL_RESET"
+    fi
 }
 
-# --- Exit code indicator (failure only) ---
-ps1_exit() {
-  local code=${__ps1_last_exit:-0}
-  [ "$code" -ne 0 ] && printf "\033[38;2;239;68;68m[%d]\033[0m " "$code"
+# --- Current path (replaces $HOME with ~) ---
+__jl_path() {
+    local path="${PWD/#$HOME/\~}"
+    printf "%b%s%b" "$__JL_PATH" "$path" "$__JL_RESET"
+}
+
+# --- Exit code (shown only on failure) ---
+__jl_exit() {
+    local code=${__ps1_last_exit:-0}
+    [ "$code" -ne 0 ] && \
+        printf "%b[%d]%b " "$__JL_EXIT" "$code" "$__JL_RESET"
+}
+
+# --- Prompt symbol ---
+__jl_symbol() {
+    # printf "%b❯%b " "$__JL_SYMBOL" "$__JL_RESET"
+    printf "%b>>>%b " "$__JL_SYMBOL" "$__JL_RESET"
 }
 
 # ==========================================================
 # PROMPT DEFINITION
 # ==========================================================
 if [ "$color_prompt" = yes ]; then
-    PS1='$(ps1_ssh)$(ps1_root)\
-\[\033[1;34m\]@\h \
-\[\033[38;2;100;116;139m\]:: \
-\[\033[0;37m\]\w$(git_ps1)\
-\n$(ps1_exit)$(ps1_symbol)'
+    PS1='$(__jl_ssh)$(__jl_root)'"${__JL_TIME}"'\t'"${__JL_RESET}${__JL_SEP}"' · '"${__JL_RESET}"'$(__jl_host)'"${__JL_SEP}"' · '"${__JL_RESET}"'$(__jl_path)$(__jl_git)\n$(__jl_exit)$(__jl_symbol)'
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
 fi
 
 unset color_prompt force_color_prompt
+
+# ==========================================================
+# PROMPT COMMAND
+# ==========================================================
+# IMPORTANT: __ps1_last_exit must be first — captures exit code before anything else runs
+PROMPT_COMMAND='__ps1_last_exit=$?; printf "\n"'
+
+# # ==========================================================
+# # PROMPT HELPERS (SOC / IR AWARENESS)
+# # ==========================================================
+#
+# # --- Git prompt helper (clean / dirty, user only) ---
+# git_ps1() {
+#   git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+#
+#   local branch
+#   branch="$(git branch --show-current 2>/dev/null)"
+#   [ -z "$branch" ] && branch="detached:$(git rev-parse --short HEAD 2>/dev/null)"
+#
+#   local gray='\033[38;2;100;116;139m'   # structure
+#   local teal='\033[38;2;45;212;191m'    # clean
+#   local red='\033[38;2;239;68;68m'      # dirty
+#   local reset='\033[0m'
+#
+#   if git diff --quiet && git diff --cached --quiet; then
+#     printf "%b (%b%s%b)%b" "$gray" "$teal" "$branch" "$gray" "$reset"
+#   else
+#     printf "%b (%b%s*%b)%b" "$gray" "$red" "$branch" "$gray" "$reset"
+#   fi
+# }
+#
+# # --- SSH indicator ---
+# ps1_ssh() {
+#   [ -n "$SSH_CONNECTION" ] && printf "\033[38;2;250;204;21m[ssh]\033[0m "
+# }
+#
+# # --- Root indicator (user shell still detects it safely) ---
+# ps1_root() {
+#   [ "$EUID" -eq 0 ] && printf "\033[38;2;239;68;68m[root]\033[0m "
+# }
+#
+# # --- Prompt symbol ($ vs #) ---
+# ps1_symbol() {
+#   if [ "$EUID" -eq 0 ]; then
+#     printf "\033[38;2;239;68;68m#\033[0m "
+#   else
+#     printf "\033[38;2;239;68;68m$\033[0m "
+#   fi
+# }
+#
+# # --- Exit code indicator (failure only) ---
+# ps1_exit() {
+#   local code=${__ps1_last_exit:-0}
+#   [ "$code" -ne 0 ] && printf "\033[38;2;239;68;68m[%d]\033[0m " "$code"
+# }
+#
+# # ==========================================================
+# # PROMPT DEFINITION
+# # ==========================================================
+# if [ "$color_prompt" = yes ]; then
+#     PS1='$(ps1_ssh)$(ps1_root)\
+# \[\033[1;34m\]@\h \
+# \[\033[38;2;100;116;139m\]:: \
+# \[\033[0;37m\]\w$(git_ps1)\
+# \n$(ps1_exit)$(ps1_symbol)'
+# else
+#     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# fi
+#
+# unset color_prompt force_color_prompt
 
 # ==========================================================
 # TERMINAL TITLE (xterm / tmux / rxvt)

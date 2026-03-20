@@ -9,12 +9,17 @@ log() {
     echo -e "\n${cyan}[${prefix}]${reset} ${cyan}$1${reset}"
 }
 
-# Detect real user (important when running with sudo)
+# ------------------------------------------
+# Detect real user (important when run with sudo)
+# ------------------------------------------
 REAL_USER="${SUDO_USER:-$USER}"
 REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 
+# Stable UUIDs — hardcoded intentionally so reinstalling
+# never creates duplicate profiles in dconf
 FLAMY_UUID="b1e3e5d0-ffaf-4b77-9a44-7f9c3b0a7f10"
 INCIDENT_UUID="c7d9f0f2-9c33-4c3e-9b63-3f63a3c55c44"
+JULIANA_UUID="e2a4f8c1-6d3b-4a7e-9f1c-2b5d8e0a3c7f"
 
 # ------------------------------------------
 # Resolve repo paths
@@ -24,10 +29,13 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CONF_DIR="$REPO_ROOT/env/.config/terminal"
 
 # ------------------------------------------
-# Sanity check profile files
+# Sanity checks
 # ------------------------------------------
-[[ -f "$CONF_DIR/flamy-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/flamy-profile.conf"; exit 1; }
+command -v dconf >/dev/null 2>&1 || { echo "[!] dconf not found — install it first"; exit 1; }
+
+[[ -f "$CONF_DIR/flamy-profile.conf" ]]    || { echo "[!] Missing $CONF_DIR/flamy-profile.conf"; exit 1; }
 [[ -f "$CONF_DIR/incident-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/incident-profile.conf"; exit 1; }
+[[ -f "$CONF_DIR/juliana-profile.conf" ]]  || { echo "[!] Missing $CONF_DIR/juliana-profile.conf"; exit 1; }
 
 # ------------------------------------------
 # Install packages
@@ -48,58 +56,74 @@ sudo -u "$REAL_USER" mkdir -p "$REAL_HOME/.config"
 sudo chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.config"
 
 # ------------------------------------------
-# Register GNOME Terminal profiles
+# Start a single shared dbus session
+# Avoids spawning a new daemon per dconf call
 # ------------------------------------------
-log "Registering GNOME Terminal profiles"
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf write \
-  /org/gnome/terminal/legacy/profiles:/list \
-  "[ '$FLAMY_UUID', '$INCIDENT_UUID' ]"
+log "Starting shared dbus session"
+eval "$(sudo -u "$REAL_USER" HOME="$REAL_HOME" dbus-launch --sh-syntax)"
+export DBUS_SESSION_BUS_ADDRESS
+
+# Helper: run dconf as the real user inside the shared session
+dconf_as_user() {
+    sudo -u "$REAL_USER" \
+        HOME="$REAL_HOME" \
+        USER="$REAL_USER" \
+        DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" \
+        dconf "$@"
+}
 
 # ------------------------------------------
-# Set default profile (flamy)
+# Disable global menubar
 # ------------------------------------------
-log "Setting flamy as default profile"
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf write \
-  /org/gnome/terminal/legacy/profiles:/default \
-  "'$FLAMY_UUID'"
+log "Disabling menubar globally"
+dconf_as_user write /org/gnome/terminal/legacy/default-show-menubar false
+
+# ------------------------------------------
+# Register all three profiles
+# ------------------------------------------
+log "Registering profiles"
+dconf_as_user write \
+    /org/gnome/terminal/legacy/profiles:/list \
+    "['$FLAMY_UUID', '$INCIDENT_UUID', '$JULIANA_UUID']"
+
+# ------------------------------------------
+# Set default profile (juliana)
+# ------------------------------------------
+log "Setting juliana as default profile"
+dconf_as_user write \
+    /org/gnome/terminal/legacy/profiles:/default \
+    "'$JULIANA_UUID'"
 
 # ------------------------------------------
 # Load profile configs
 # ------------------------------------------
 log "Loading flamy profile"
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf load \
-  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/" \
-  < "$CONF_DIR/flamy-profile.conf"
+dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/" \
+    < "$CONF_DIR/flamy-profile.conf"
 
 log "Loading incident profile"
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf load \
-  "/org/gnome/terminal/legacy/profiles:/:$INCIDENT_UUID/" \
-  < "$CONF_DIR/incident-profile.conf"
+dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$INCIDENT_UUID/" \
+    < "$CONF_DIR/incident-profile.conf"
+
+log "Loading juliana profile"
+dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$JULIANA_UUID/" \
+    < "$CONF_DIR/juliana-profile.conf"
 
 # ------------------------------------------
-# Set Hack as default font for flamy profile
+# Set font for flamy profile
 # ------------------------------------------
-log "Setting Hack as default terminal font"
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf write \
-  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/font" \
-  "'Hack 15'"
+log "Setting Hack as font for flamy profile"
+dconf_as_user write \
+    "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/font" \
+    "'Hack 15'"
+dconf_as_user write \
+    "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/use-system-font" \
+    "false"
 
-sudo -u "$REAL_USER" \
-  HOME="$REAL_HOME" USER="$REAL_USER" \
-  dbus-launch dconf write \
-  "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/use-system-font" \
-  "false"
+# ------------------------------------------
+# Kill the temporary dbus daemon
+# ------------------------------------------
+[ -n "$DBUS_SESSION_BUS_PID" ] && kill "$DBUS_SESSION_BUS_PID" 2>/dev/null || true
 
 log "GNOME Terminal setup completed"
-
 echo -e "\e[1;32m[terminal] DONE\e[0m"

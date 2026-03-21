@@ -1,4 +1,3 @@
-
 # i3 CONFIG — SOC / IR WORKSTATION
 # ==========================================================
 # WM: i3-gaps
@@ -45,6 +44,7 @@ bindsym $modkey+Return exec --no-startup-id terminator
 bindsym $modkey+d exec --no-startup-id rofi -show run
 bindsym $modkey+q kill
 bindsym $modkey+Shift+period exec /usr/bin/flameshot gui
+
 # ==========================================================
 # QUICK LAUNCH (Alt+Ctrl)
 # ==========================================================
@@ -62,6 +62,79 @@ bindsym Ctrl+6 nop
 bindsym Ctrl+7 nop
 bindsym Ctrl+8 nop
 bindsym Ctrl+9 nop
+
+# ==========================================================
+# VOLUME CONTROL (PipeWire / pactl)
+# Step: 5% · OSD via dunst notify-send
+# ==========================================================
+bindsym XF86AudioRaiseVolume exec --no-startup-id \
+    pactl set-sink-volume @DEFAULT_SINK@ +5% && \
+    notify-send -t 1000 -h string:x-dunst-stack-tag:volume \
+    "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1)"
+
+bindsym XF86AudioLowerVolume exec --no-startup-id \
+    pactl set-sink-volume @DEFAULT_SINK@ -5% && \
+    notify-send -t 1000 -h string:x-dunst-stack-tag:volume \
+    "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+%' | head -1)"
+
+bindsym XF86AudioMute exec --no-startup-id \
+    pactl set-sink-mute @DEFAULT_SINK@ toggle && \
+    notify-send -t 1000 -h string:x-dunst-stack-tag:volume \
+    "Volume" "$(pactl get-sink-mute @DEFAULT_SINK@ | grep -oP '(yes|no)')"
+
+bindsym XF86AudioMicMute exec --no-startup-id \
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle && \
+    notify-send -t 1000 -h string:x-dunst-stack-tag:mic \
+    "Mic" "$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -oP '(yes|no)')"
+
+# Alt fallback keybindings (for keyboards without media keys)
+bindsym $modkey+F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $modkey+F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $modkey+F3 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# ==========================================================
+# MEDIA KEYS (playerctl)
+# ==========================================================
+bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext  exec --no-startup-id playerctl next
+bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
+
+# ==========================================================
+# FAN CONTROL MODE (MS01 — NCT6798D via hwmon5/pwm1)
+# Firmware handles automatic mode — we only override when needed
+#
+# (s) status    — show CPU temp + fan RPMs via dunst
+# (f) full      — force fans to 100% (emergency / stress testing)
+# (a) auto      — restore firmware automatic control
+#
+# Note: SYSTIN/AUXTIN readings over 100°C are uncalibrated
+#       thermistor noise — ignore them. Watch CPUTIN and coretemp.
+# ==========================================================
+set $mode_fan Fan: (s) status, (f) full speed, (a) auto restore
+mode "$mode_fan" {
+    bindsym s exec --no-startup-id \
+        notify-send -t 6000 -h string:x-dunst-stack-tag:fan \
+        "Thermal status" \
+        "CPU: $(sensors | grep 'Package id 0' | awk '{print $4}')\nCPUTIN: $(sensors | grep 'CPUTIN' | awk '{print $2}')\nFan1: $(sensors | grep '^fan1' | awk '{print $2, $3}')\nFan2: $(sensors | grep '^fan2' | awk '{print $2, $3}')", \
+        mode "default"
+
+    bindsym f exec --no-startup-id \
+        pkexec bash -c 'echo 1 > /sys/class/hwmon/hwmon5/pwm1_enable && echo 255 > /sys/class/hwmon/hwmon5/pwm1' && \
+        notify-send -t 2000 -h string:x-dunst-stack-tag:fan \
+        "Fan" "Full speed — 100% PWM", \
+        mode "default"
+
+    bindsym a exec --no-startup-id \
+        pkexec bash -c 'echo 0 > /sys/class/hwmon/hwmon5/pwm1_enable' && \
+        notify-send -t 2000 -h string:x-dunst-stack-tag:fan \
+        "Fan" "Auto — firmware control restored", \
+        mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $modkey+Shift+t mode "$mode_fan"
 
 # ==========================================================
 # FOCUS & MOVE
@@ -130,21 +203,19 @@ bindsym $modkey+Shift+8 move container to workspace $ws8
 bindsym $modkey+Shift+9 move container to workspace $ws9
 bindsym $modkey+Shift+0 move container to workspace $ws10
 
-
 # ==========================================================
 # RESIZE MODE
 # ==========================================================
 mode "resize" {
-    bindsym $left resize shrink width 12 px or 12 ppt
-    bindsym $right resize grow width 12 px or 12 ppt
-    bindsym $up resize shrink height 12 px or 12 ppt
-    bindsym $down resize grow height 12 px or 12 ppt
+    bindsym $left  resize shrink width  12 px or 12 ppt
+    bindsym $right resize grow   width  12 px or 12 ppt
+    bindsym $up    resize shrink height 12 px or 12 ppt
+    bindsym $down  resize grow   height 12 px or 12 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $modkey+r mode "resize"
-
 
 # ==========================================================
 # BAR (i3status)
@@ -153,7 +224,7 @@ bar {
     status_command i3status -c ~/.config/i3status/config
     position top
     strip_workspace_numbers yes
-    font pango:Monospace 25
+    font pango:Monospace 15
 
     colors {
         background  $bg
@@ -165,14 +236,12 @@ bar {
 }
 bindsym $modkey+m bar mode toggle
 
-
 # ==========================================================
 # GAPS
 # ==========================================================
 gaps inner 10
 gaps outer 0
 smart_gaps on
-
 
 # ==========================================================
 # SYSTEM MODE
@@ -189,24 +258,16 @@ mode "$mode_system" {
 }
 bindsym $modkey+Shift+e mode "$mode_system"
 
-
 # ==========================================================
 # WINDOW DECORATIONS
 # ==========================================================
 new_window pixel 1
 
-
-
-
+# ==========================================================
 # I3 MAINTENANCE
 # ==========================================================
-
-# Reload configuration (safe)
 bindsym $modkey+Shift+c reload, exec notify-send "i3" "Configuration reloaded"
-
-# Restart i3 (preserves session)
 bindsym $modkey+Shift+r restart, exec notify-send "i3" "i3 restarted"
-
 
 # ==========================================================
 # AUTOSTART
@@ -217,4 +278,4 @@ exec --no-startup-id flameshot
 exec --no-startup-id numlockx on
 exec --no-startup-id feh --bg-scale ~/Pictures/pics/1.png
 exec --no-startup-id vmware-user
-
+exec --no-startup-id nohup /bin/bash -c 'DISPLAY=:1 ~/.local/scripts/gpu-fan.sh daemon >> ~/.local/scripts/gpu-fan.log 2>&1' &

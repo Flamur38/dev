@@ -12,4 +12,7 @@ cp ./env/.zshrc $HOME/.zshrc
 cp ./env/.xprofile $HOME/.xprofile
 cp ./dev-env $HOME/.local/scripts/dev-env
 
+cp ./env/.bash_aliases $HOME/.bash_aliases
+cp ./env/.bash_profile $HOME/.bash_profile
+cp ./env/.bashrc $HOME/.bashrc
 

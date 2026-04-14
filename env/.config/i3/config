@@ -279,3 +279,20 @@ exec --no-startup-id flameshot
 exec --no-startup-id numlockx on
 exec --no-startup-id feh --bg-scale ~/Pictures/pics/1.png
 exec --no-startup-id vmware-user
+
+
+# # ---------- INSTALL NERD FONTS ---------
+# # example: install JetBrains Mono Nerd Font manually
+# mkdir -p ~/.local/share/fonts
+# cd ~/.local/share/fonts
+# wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+# unzip JetBrainsMono.zip
+# fc-cache -fv
+#
+#
+# font pango:JetBrainsMono Nerd Font 10
+# bar {
+#     font pango:JetBrainsMono Nerd Font 10
+# }Mod+Shift+R
+# ------------------------------------------
+

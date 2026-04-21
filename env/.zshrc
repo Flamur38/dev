@@ -2,11 +2,11 @@
 # OH MY ZSH
 # -------------------------
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 plugins=(
     git
-    zsh-autosuggestions
+    # zsh-autosuggestions
     zsh-syntax-highlighting
     sudo
 )
@@ -78,7 +78,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
-    alias ip='ip --color=auto'
+    # alias ip='ip --color=auto'
 
     export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
     export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
@@ -99,6 +99,37 @@ fi
 # PATH
 # -------------------------
 export PATH="$HOME/.local/bin:$PATH"
+
+
+
+# Get local IP
+get_ip() {
+    /sbin/ip -4 addr show scope global | grep inet | awk '{print $2}' | cut -d/ -f1 | head -n1
+}
+
+# Get VPN status
+get_vpn() {
+    local vpn_ip
+    vpn_ip=$(/sbin/ip -4 addr show tun0 2>/dev/null | grep inet | awk '{print $2}' | cut -d/ -f1)
+    if [ -n "$vpn_ip" ]; then
+        echo "%{\033[1;37m%}$vpn_ip%{\033[1;32m%}]─[%{\033[0m%}"
+    else
+        # echo "%{\033[0;37m%}192.168.11.10%{\033[0;32m%}]─[DFIR %{\033[0;32m%} %{\033[0m%}"
+        echo "%{\033[0;37m%}DFIR  %{\033[0m%}"
+    fi
+}
+
+# Green
+PROMPT=$'%{\033[0;32m%}[$(get_vpn)%{\033[0;34m%}@%m%{\033[0;32m%}]%{\033[0m%} %{\033[1;38;5;231m%}%~%{\033[0m%}\n%(?.%{\033[0;32m%}.%{\033[0;31m%})>>> %{\033[0m%}'
+
+# Red
+# PROMPT=$'%{\033[0;31m%}[$(get_vpn)%{\033[0;34m%}@%m%{\033[0;31m%}]%{\033[0m%} %{\033[1;38;5;231m%}%~%{\033[0m%}\n%(?.%{\033[0;31m%}.%{\033[0;31m%})>>> $ %{\033[0m%}'
+
+# Orange
+# PROMPT=$'%{\033[0;33m%}[$(get_vpn)%{\033[0;34m%}@%m%{\033[0;33m%}]%{\033[0m%} %{\033[1;38;5;231m%}%~%{\033[0m%}\n%(?.%{\033[0;33m%}.%{\033[0;33m%})>>> $ %{\033[0m%}'
+
+
+
 
 # -------------------------
 # ALIASES — GENERAL

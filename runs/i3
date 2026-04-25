@@ -22,7 +22,7 @@ sudo apt install -y \
     xbacklight
 
 log "Removing i3status (replaced by polybar)"
-sudo apt remove -y i3status 2>/dev/null || true
+# sudo apt remove -y i3status 2>/dev/null || true
 
 log "Done"
 echo -e "\e[1;32m[i3] DONE\e[0m"

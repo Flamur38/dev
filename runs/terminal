@@ -17,9 +17,9 @@ REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
 
 # Stable UUIDs — hardcoded intentionally so reinstalling
 # never creates duplicate profiles in dconf
-FLAMY_UUID="b1e3e5d0-ffaf-4b77-9a44-7f9c3b0a7f10"
+HTB_UUID="b1e3e5d0-ffaf-4b77-9a44-7f9c3b0a7f10"
 INCIDENT_UUID="c7d9f0f2-9c33-4c3e-9b63-3f63a3c55c44"
-JULIANA_UUID="e2a4f8c1-6d3b-4a7e-9f1c-2b5d8e0a3c7f"
+UBUNTU_UUID="e2a4f8c1-6d3b-4a7e-9f1c-2b5d8e0a3c7f"
 
 # ------------------------------------------
 # Resolve repo paths
@@ -33,9 +33,9 @@ CONF_DIR="$REPO_ROOT/env/.config/terminal"
 # ------------------------------------------
 command -v dconf >/dev/null 2>&1 || { echo "[!] dconf not found — install it first"; exit 1; }
 
-[[ -f "$CONF_DIR/flamy-profile.conf" ]]    || { echo "[!] Missing $CONF_DIR/flamy-profile.conf"; exit 1; }
+[[ -f "$CONF_DIR/htb-profile.conf" ]]      || { echo "[!] Missing $CONF_DIR/htb-profile.conf"; exit 1; }
 [[ -f "$CONF_DIR/incident-profile.conf" ]] || { echo "[!] Missing $CONF_DIR/incident-profile.conf"; exit 1; }
-[[ -f "$CONF_DIR/juliana-profile.conf" ]]  || { echo "[!] Missing $CONF_DIR/juliana-profile.conf"; exit 1; }
+[[ -f "$CONF_DIR/ubuntu-profile.conf" ]]   || { echo "[!] Missing $CONF_DIR/ubuntu-profile.conf"; exit 1; }
 
 # ------------------------------------------
 # Install packages
@@ -84,41 +84,30 @@ dconf_as_user write /org/gnome/terminal/legacy/default-show-menubar false
 log "Registering profiles"
 dconf_as_user write \
     /org/gnome/terminal/legacy/profiles:/list \
-    "['$FLAMY_UUID', '$INCIDENT_UUID', '$JULIANA_UUID']"
+    "['$HTB_UUID', '$INCIDENT_UUID', '$UBUNTU_UUID']"
 
 # ------------------------------------------
-# Set default profile (juliana)
+# Set default profile (ubuntu)
 # ------------------------------------------
-log "Setting juliana as default profile"
+log "Setting ubuntu as default profile"
 dconf_as_user write \
     /org/gnome/terminal/legacy/profiles:/default \
-    "'$JULIANA_UUID'"
+    "'$UBUNTU_UUID'"
 
 # ------------------------------------------
 # Load profile configs
 # ------------------------------------------
-log "Loading flamy profile"
-dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/" \
-    < "$CONF_DIR/flamy-profile.conf"
+log "Loading htb profile"
+dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$HTB_UUID/" \
+    < "$CONF_DIR/htb-profile.conf"
 
 log "Loading incident profile"
 dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$INCIDENT_UUID/" \
     < "$CONF_DIR/incident-profile.conf"
 
-log "Loading juliana profile"
-dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$JULIANA_UUID/" \
-    < "$CONF_DIR/juliana-profile.conf"
-
-# ------------------------------------------
-# Set font for flamy profile
-# ------------------------------------------
-log "Setting Hack as font for flamy profile"
-dconf_as_user write \
-    "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/font" \
-    "'Hack 15'"
-dconf_as_user write \
-    "/org/gnome/terminal/legacy/profiles:/:$FLAMY_UUID/use-system-font" \
-    "false"
+log "Loading ubuntu profile"
+dconf_as_user load "/org/gnome/terminal/legacy/profiles:/:$UBUNTU_UUID/" \
+    < "$CONF_DIR/ubuntu-profile.conf"
 
 # ------------------------------------------
 # Kill the temporary dbus daemon

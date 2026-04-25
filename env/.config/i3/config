@@ -18,24 +18,22 @@ set $left h
 set $right l
 
 # ==========================================================
-# COLORS — SOC PALETTE
+# COLORS — INVESTIGATION PALETTE
 # ==========================================================
-set $bg        #0B1220
-set $bg-alt    #111827
-set $fg        #E6EDF3
-set $fg-muted  #64748B
-set $blue      #38BDF8
-set $teal      #2DD4BF
-set $red       #EF4444
-set $yellow    #FACC15
+set $bg        #0a0a0a
+set $bg-alt    #1a1a1a
+set $fg        #646464
+set $fg-muted  #3a3a3a
+set $accent    #b42828
+set $dim       #1a1a1a
 
 # ==========================================================
 # WINDOW COLORS
 # ==========================================================
-client.focused          $blue      $bg-alt     $fg       $blue
-client.focused_inactive $fg-muted  $bg         $fg-muted $fg-muted
-client.unfocused        $fg-muted  $bg         $fg-muted $fg-muted
-client.urgent           $red       $bg-alt     $fg       $red
+client.focused          $accent   $bg-alt   $fg      $accent
+client.focused_inactive $fg-muted $bg       $fg-muted $fg-muted
+client.unfocused        $fg-muted $bg       $fg-muted $fg-muted
+client.urgent           $accent   $bg-alt   $fg      $accent
 
 # ==========================================================
 # APPLICATION LAUNCHERS
@@ -218,23 +216,12 @@ mode "resize" {
 bindsym $modkey+r mode "resize"
 
 # ==========================================================
-# BAR (i3status)
+# BAR — polybar (replaces i3status)
 # ==========================================================
-bar {
-    status_command i3status -c ~/.config/i3status/config
-    position top
-    strip_workspace_numbers yes
-    tray_output primary
-    font pango:Monospace 15
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+bindsym $modkey+m exec --no-startup-id polybar-msg cmd toggle
 
-    colors {
-        background  $bg
-        statusline  $fg
-        focused_workspace   $bg $blue $bg
-        inactive_workspace  $bg $bg-alt $fg-muted
-        urgent_workspace    $bg $red $bg
-    }
-}
+
 bindsym $modkey+m bar mode toggle
 
 # ==========================================================
@@ -247,7 +234,7 @@ smart_gaps on
 # ==========================================================
 # SYSTEM MODE
 # ==========================================================
-set $Locker i3lock -d -c $bg -f
+set $Locker i3lock -d -c 0a0a0a -f
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot
 mode "$mode_system" {

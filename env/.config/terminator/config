@@ -1,38 +1,46 @@
 [global_config]
+  focus = system
 [keybindings]
+  new_tab = <Shift><Ctrl>t
+  split_horiz = <Shift><Ctrl>o
+  split_vert = <Shift><Ctrl>e
+  close_term = <Shift><Ctrl>w
+  toggle_zoom = <Shift><Ctrl>x
+  next_tab = <Ctrl>Tab
+  prev_tab = <Shift><Ctrl>Tab
 [profiles]
   [[default]]
     allow_bold = False
     visible_bell = True
     icon_bell = False
-    background_color = "#141d2b"
-    background_darkness = 0.95
-    cursor_fg_color = "#000000"
-    cursor_bg_color = "#aaaaaa"
+    background_color = "#1a2332"
+    cursor_fg_color = "#1a2332"
+    cursor_bg_color = "#a4b1cd"
     cursor_color_default = False
-    font = Monospace 17
+    font = Monospace 19
     foreground_color = "#a4b1cd"
     show_titlebar = False
-    scroll_on_keystroke = False
-    scrollback_infinite = True
-    palette = "#1f2229:#ff3e3e:#c5f467:#ffcc5c:#2e6cff:#c695c6:#5cecc6:#c5d1eb:#6c717d:#ff8484:#9fef00:#ffaf00:#5cb2ff:#9f00ff:#5cecc6:#c5d1eb"
+    scrollbar_position = hidden
+    scrollback_lines = 5000
+    palette = "#000000:#ff3e3e:#9fef00:#ffaf00:#5cb2ff:#9f00ff:#2ee7b6:#ffffff:#666666:#ff8484:#c5f467:#ffcc5c:#004cff:#c16cfa:#5cecc6:#ffffff"
     use_system_font = False
-  [[small]]
+    copy_on_selection = True
+  [[investigation]]
     allow_bold = False
     visible_bell = True
     icon_bell = False
-    background_color = "#141d2b"
-    background_darkness = 0.95
-    cursor_fg_color = "#000000"
-    cursor_bg_color = "#aaaaaa"
+    background_color = "#0a0a0a"
+    cursor_fg_color = "#0a0a0a"
+    cursor_bg_color = "#8a8a8a"
     cursor_color_default = False
-    font = Monospace 12
-    foreground_color = "#a4b1cd"
+    font = Monospace 19
+    foreground_color = "#8a8a8a"
     show_titlebar = False
-    scroll_on_keystroke = False
-    scrollback_infinite = True
-    palette = "#1f2229:#ff3e3e:#c5f467:#fea44c:#2e6cff:#cf8dfb:#5cecc6:#c5d1eb:#6c717d:#ff8484:#9fef00:#ff8a18:#5cb2ff:#9f00ff:#2ee7b6:#c5d1eb"
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#1a1a1a:#cc3333:#4a7a4a:#8a6a2a:#2a4a7a:#6a3a6a:#2a6a6a:#8a8a8a:#3a3a3a:#ff3e3e:#5a9a5a:#aa8a3a:#3a6aaa:#8a4a8a:#3a8a8a:#aaaaaa"
     use_system_font = False
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[window0]]]
@@ -41,4 +49,5 @@
     [[[child1]]]
       type = Terminal
       parent = window0
+      profile = investigation
 [plugins]

@@ -1,50 +1,34 @@
 #!/usr/bin/env bash
 set -e
 
-log() { echo "[terminator] $1"; }
+log() { echo -e "\n\e[1;36m[terminator]\e[0m \e[1;36m$1\e[0m"; }
 
-CFG_DIR="$HOME/.config/terminator"
-CFG_FILE="$CFG_DIR/config"
+# ------------------------------------------
+# Resolve repo paths
+# ------------------------------------------
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+CONF_SRC="$REPO_ROOT/env/.config/terminator/config"
+CONF_DST="$HOME/.config/terminator/config"
 
+# ------------------------------------------
+# Sanity check
+# ------------------------------------------
+[[ -f "$CONF_SRC" ]] || { echo "[!] Missing $CONF_SRC"; exit 1; }
+
+# ------------------------------------------
+# Install
+# ------------------------------------------
 log "Installing Terminator"
 sudo apt update
 sudo apt install -y terminator
 
-mkdir -p "$CFG_DIR"
+# ------------------------------------------
+# Deploy config
+# ------------------------------------------
+log "Deploying Terminator config"
+mkdir -p "$(dirname "$CONF_DST")"
+cp -f "$CONF_SRC" "$CONF_DST"
 
-log "Writing Terminator config (default profile, Sublime/Juliana theme)"
-cat > "$CFG_FILE" <<'EOF'
-[global_config]
-  profile = default
-[keybindings]
-[profiles]
-  [[default]]
-    allow_bold = False
-    visible_bell = True
-    icon_bell = False
-    font = Hack 18
-    show_titlebar = False
-    use_system_font = False
-
-    # Sublime Juliana-ish palette
-    background_color = "#a4b1cd"
-    foreground_color = "#101927"
-    cursor_color = "#fac761"
-    selection_color = "#3f4750"
-
-    # 16-color palette (normal + bright)
-    palette = "#303841:#ec5f66:#99c794:#fac761:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#c76b70:#99c794:#f9ae58:#95b2d6:#c695c6:#87c7c7:#ffffff"
-
-[layouts]
-  [[default]]
-    [[[window0]]]
-      type = Window
-      parent = ""
-    [[[child1]]]
-      type = Terminal
-      parent = window0
-
-[plugins]
-EOF
-
-log "Done. Restart Terminator to apply changes."
+log "Done — restart Terminator to apply changes"
+echo -e "\e[1;32m[terminator] DONE\e[0m"

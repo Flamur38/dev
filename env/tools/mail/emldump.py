@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# Example:
+# $ python3 emldump.py -s 4 -d > quotation.iso
+
 __description__ = 'EML dump utility'
 __author__ = 'Didier Stevens'
 __version__ = '0.0.13'

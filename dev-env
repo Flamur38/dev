@@ -110,8 +110,8 @@ sync_tree "$DEV_ENV/env/.local" "$HOME/.local"
 # Sync wallpapers/pictures into ~/Pictures
 sync_tree "$DEV_ENV/env/pictures" "$HOME/Pictures"
 
-# Sync custom tools (email_tools, etc.) into ~/Tools
-sync_tree "$DEV_ENV/env/Tools" "$HOME/Tools"
+# Sync custom tools (email_tools, etc.) into ~/tools
+sync_tree "$DEV_ENV/env/tools" "$HOME/tools"
 
 # Copy individual shell config files directly to $HOME.
 # These are single files, not directories, so copy_file is used instead of sync_tree.

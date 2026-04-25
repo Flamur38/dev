@@ -1,3 +1,7 @@
+
+# Usage
+# python3 eioc.py email.eml
+
 import re
 import sys
 import quopri

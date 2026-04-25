@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# This tools are used to analyze pdf documents:
+
 __description__ = 'Tool to test a PDF file'
 __author__ = 'Didier Stevens'
 __version__ = '0.2.8'

@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# Example:
+# $ python3 oledump -i sample.xlsm
+# $ python3 oledump.py -s A4 -v sample.xlsm
+
+
 __description__ = 'Analyze OLE files (Compound Binary Files)'
 __author__ = 'Didier Stevens'
 __version__ = '0.0.75'

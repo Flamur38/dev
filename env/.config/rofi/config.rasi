@@ -1,97 +1,60 @@
-/* ==========================================================
- * ROFI — SOC / IR MINIMAL THEME
- * Matches terminal, tmux, PS1
- * ========================================================== */
-
 * {
-    bg:            #0B1220;   /* window background */
-    bg-alt:        #111827;   /* list rows (still dark!) */
-
-    fg:            #E6EDF3;   /* main text */
-    fg-muted:      #C0CAF5;   /* list item text */
-
-    selection:     #38BDF8;
-    border:        #1F2933;
-    alert:         #EF4444;
-
-    font: "JetBrains Mono 30";
+  bg:    #0a0a0a;
+  fg:    #646464;
+  red:   #b42828;
+  dim:   #1a1a1a;
+  background-color: transparent;
+  text-color:       @fg;
+  font:             "Monospace 35";
 }
-
-/* ----------------------------------------------------------
- * Window
- * ---------------------------------------------------------- */
 window {
-    width: 40%;
-    padding: 20px;
-    border: 2px;
-    border-color: @border;
-    background-color: @bg;
-    location: center;
+  background-color: @bg;
+  border:           1px;
+  border-color:     @red;
+  border-radius:    0px;
+  width:            1700px;
+  padding:          16px;
 }
-
-/* ----------------------------------------------------------
- * Input bar
- * ---------------------------------------------------------- */
+mainbox {
+  background-color: transparent;
+  children:         [ inputbar, listview ];
+  spacing:          12px;
+}
 inputbar {
-    padding: 8px 10px;
-    spacing: 10px;
-    background-color: @bg-alt;
-    border-radius: 4px;
+  background-color: @dim;
+  border-radius:    0px;
+  padding:          12px 16px;
+  children:         [ prompt, entry ];
 }
-
 prompt {
-    text-color: @fg-muted;
+  text-color:       @red;
+  padding:          0 8px 0 0;
 }
-
 entry {
-    text-color: @fg;
+  text-color:       @fg;
+  placeholder:      "search...";
+  placeholder-color: #3a3a3a;
 }
-
-/* ----------------------------------------------------------
- * List view
- * ---------------------------------------------------------- */
 listview {
-    lines: 8;
-    spacing: 6px;
-    padding: 10px 0px;
-    background-color: @bg;
+  background-color: transparent;
+  lines:            10;
+  scrollbar:        false;
+  spacing:          4px;
 }
-
-/* ----------------------------------------------------------
- * Elements — dark, uniform, no zebra
- * ---------------------------------------------------------- */
-element,
-element normal,
-element alternate,
-element active,
-element urgent {
-    background-color: @bg-alt;
-    text-color: @fg-muted;
-    padding: 6px 10px;
-    border-radius: 4px;
+element {
+  background-color: transparent;
+  border-radius:    0px;
+  padding:          10px 16px;
 }
-
-element selected,
-element selected.normal,
-element selected.alternate {
-    background-color: @selection;
-    text-color: @bg;
+element selected {
+  background-color: @dim;
+  text-color:       @red;
 }
-
-element urgent.selected {
-    background-color: @selection;
-    text-color: @bg;
+element-icon {
+  size:    24px;
+  padding: 0 10px 0 0;
 }
-
-/* ----------------------------------------------------------
- * Message / error
- * ---------------------------------------------------------- */
-message {
-    background-color: @bg-alt;
-    padding: 10px;
-}
-
-textbox {
-    text-color: @alert;
+element-text {
+  font: "Monospace 25";
 }
 

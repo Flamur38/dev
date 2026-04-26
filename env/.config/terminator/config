@@ -41,6 +41,22 @@
     palette = "#1a1a1a:#cc3333:#4a7a4a:#8a6a2a:#2a4a7a:#6a3a6a:#2a6a6a:#8a8a8a:#3a3a3a:#ff3e3e:#5a9a5a:#aa8a3a:#3a6aaa:#8a4a8a:#3a8a8a:#aaaaaa"
     use_system_font = False
     copy_on_selection = True
+  [[small]]
+    allow_bold = False
+    visible_bell = True
+    icon_bell = False
+    background_color = "#0a0a0a"
+    cursor_fg_color = "#0a0a0a"
+    cursor_bg_color = "#8a8a8a"
+    cursor_color_default = False
+    font = Monospace 12
+    foreground_color = "#8a8a8a"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#1a1a1a:#cc3333:#4a7a4a:#8a6a2a:#2a4a7a:#6a3a6a:#2a6a6a:#8a8a8a:#3a3a3a:#ff3e3e:#5a9a5a:#aa8a3a:#3a6aaa:#8a4a8a:#3a8a8a:#aaaaaa"
+    use_system_font = False
+    copy_on_selection = True
 [layouts]
   [[default]]
     [[[window0]]]

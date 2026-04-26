@@ -98,3 +98,29 @@ sudo snap install metasploit-framework
 log "Security tools installation completed"
 
 echo -e "\e[1;32m[security_tools] DONE\e[0m"
+
+
+# ----------------------------------------
+# Chainsaw (EVTX threat hunting)
+# ----------------------------------------
+log "Installing Chainsaw (pre-built binary)"
+
+CHAINSAW_DIR="$HOME/tools/chainsaw"
+CHAINSAW_ZIP="$HOME/tools/chainsaw_all_platforms+rules+examples.zip"
+
+mkdir -p "$HOME/tools"
+
+wget -q https://github.com/WithSecureLabs/chainsaw/releases/latest/download/chainsaw_all_platforms+rules+examples.zip \
+  -O "$CHAINSAW_ZIP"
+
+unzip -q "$CHAINSAW_ZIP" -d "$HOME/tools/"
+
+chmod +x "$CHAINSAW_DIR/chainsaw_x86_64-unknown-linux-gnu"
+sudo cp "$CHAINSAW_DIR/chainsaw_x86_64-unknown-linux-gnu" /usr/local/bin/chainsaw
+
+rm "$CHAINSAW_ZIP"
+
+warn "Chainsaw rules:    $CHAINSAW_DIR/rules"
+warn "Sigma rules:       $CHAINSAW_DIR/sigma"
+warn "Mappings:          $CHAINSAW_DIR/mappings"
+warn "EVTX samples:      $CHAINSAW_DIR/EVTX-ATTACK-SAMPLES"

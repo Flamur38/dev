@@ -122,7 +122,3 @@ if ! shopt -oq posix; then
 fi
 
 bind 'set completion-ignore-case on'
-
-# Created by `pipx` on 2026-04-26 12:02:50
-export PATH="$PATH:/home/flamy/.local/bin"
-. "$HOME/.cargo/env"

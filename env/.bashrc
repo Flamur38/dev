@@ -56,12 +56,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+NEWLINE_BEFORE_PROMPT=yes
+[ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
+
 # Two-line PS1
 # Line 1: [HH:MM AM/PM]-[~/path]
 # Line 2:  $
 __ps1_time() { date +"%I:%M %p"; }
 
-PS1='\[\033[01;37m\][\[\033[01;33m\]$(__ps1_time)\[\033[01;37m\]]-[\[\033[01;34m\]\w\[\033[01;37m\]]\[\033[00m\]\n \[\033[01;31m\]$\[\033[00m\] '
+PS1='\[\033[01;37m\][\[\033[01;32m\]$(__ps1_time)\[\033[01;37m\]]-[\[\033[01;34m\]\w\[\033[01;37m\]]\[\033[00m\]\n \[\033[01;33m\]$\[\033[00m\] '
 
 unset color_prompt force_color_prompt
 
@@ -119,3 +122,7 @@ if ! shopt -oq posix; then
 fi
 
 bind 'set completion-ignore-case on'
+
+# Created by `pipx` on 2026-04-26 12:02:50
+export PATH="$PATH:/home/flamy/.local/bin"
+. "$HOME/.cargo/env"

@@ -64,7 +64,7 @@ NEWLINE_BEFORE_PROMPT=yes
 # Line 2:  $
 __ps1_time() { date +"%I:%M %p"; }
 
-PS1='\[\033[01;37m\][\[\033[01;32m\]$(__ps1_time)\[\033[01;37m\]]-[\[\033[01;34m\]\w\[\033[01;37m\]]\[\033[00m\]\n \[\033[01;33m\]$\[\033[00m\] '
+PS1='\[\033[00;37m\][\[\033[00;31m\]$(__ps1_time)\[\033[00;37m\]]-[\[\033[00;38;5;231m\]\w\[\033[00;37m\]]\[\033[00m\]\n \[\033[00;33m\]$\[\033[00m\] '
 
 unset color_prompt force_color_prompt
 
@@ -122,3 +122,4 @@ if ! shopt -oq posix; then
 fi
 
 bind 'set completion-ignore-case on'
+

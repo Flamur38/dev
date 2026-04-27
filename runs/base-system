@@ -47,6 +47,7 @@ sudo apt install -y \
   arandr \
   tshark \
   polybar \
+  tree \
 
 # ----------------------------------------
 # Timezone

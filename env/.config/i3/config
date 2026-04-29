@@ -222,7 +222,6 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 bindsym $modkey+m exec --no-startup-id polybar-msg cmd toggle
 
 
-bindsym $modkey+m bar mode toggle
 
 # ==========================================================
 # GAPS

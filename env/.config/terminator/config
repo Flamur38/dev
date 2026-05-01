@@ -17,7 +17,7 @@
     cursor_fg_color = "#1a2332"
     cursor_bg_color = "#a4b1cd"
     cursor_color_default = False
-    font = Monospace 19
+    font = Monospace 18
     foreground_color = "#a4b1cd"
     show_titlebar = False
     scrollbar_position = hidden
@@ -33,7 +33,7 @@
     cursor_fg_color = "#0a0a0a"
     cursor_bg_color = "#8a8a8a"
     cursor_color_default = False
-    font = Monospace 19
+    font = Monospace 18
     foreground_color = "#8a8a8a"
     show_titlebar = False
     scrollbar_position = hidden
@@ -49,12 +49,42 @@
     cursor_fg_color = "#0a0a0a"
     cursor_bg_color = "#8a8a8a"
     cursor_color_default = False
-    font = Monospace 12
+    font = Monospace 14
     foreground_color = "#8a8a8a"
     show_titlebar = False
     scrollbar_position = hidden
     scrollback_lines = 10000
     palette = "#1a1a1a:#cc3333:#4a7a4a:#8a6a2a:#2a4a7a:#6a3a6a:#2a6a6a:#8a8a8a:#3a3a3a:#ff3e3e:#5a9a5a:#aa8a3a:#3a6aaa:#8a4a8a:#3a8a8a:#aaaaaa"
+    use_system_font = False
+    copy_on_selection = True
+  [[ubuntu]]
+    allow_bold = False
+    visible_bell = True
+    icon_bell = False
+    background_color = "#300A24"
+    cursor_fg_color = "#300A24"
+    cursor_bg_color = "#D3D7CF"
+    cursor_color_default = False
+    font = Monospace 18
+    foreground_color = "#D3D7CF"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 5000
+    use_system_font = False
+    copy_on_selection = True
+  [[ubuntu 2]]
+    allow_bold = False
+    visible_bell = True
+    icon_bell = False
+    background_color = "#300A24"
+    cursor_fg_color = "#300A24"
+    cursor_bg_color = "#D3D7CF"
+    cursor_color_default = False
+    font = Monospace 14
+    foreground_color = "#D3D7CF"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 5000
     use_system_font = False
     copy_on_selection = True
 [layouts]

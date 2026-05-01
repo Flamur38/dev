@@ -48,6 +48,7 @@ sudo apt install -y \
   tshark \
   polybar \
   tree \
+  vim-gtk3 \
 
 # ----------------------------------------
 # Timezone

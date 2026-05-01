@@ -122,8 +122,9 @@ copy_file "$DEV_ENV/env/.tmux.conf"     "$HOME/.tmux.conf"     # tmux keybinds &
 copy_file "$DEV_ENV/env/.bashrc"        "$HOME/.bashrc"        # bash interactive shell config
 copy_file "$DEV_ENV/env/.bash_profile"  "$HOME/.bash_profile"  # bash login shell config
 copy_file "$DEV_ENV/env/.bash_aliases"  "$HOME/.bash_aliases"  # bash aliases (usually sourced by .bashrc)
-copy_file "$DEV_ENV/env/.Xresources"   "$HOME/.Xresources"    # X11 resource settings (DPI, fonts, colors)
-copy_file "$DEV_ENV/env/.xinitrc"      "$HOME/.xinitrc"       # X11 startup script (runs startx)
+copy_file "$DEV_ENV/env/.Xresources"   "$HOME/.Xresources"     # X11 resource settings (DPI, fonts, colors)
+copy_file "$DEV_ENV/env/.xinitrc"      "$HOME/.xinitrc"        # X11 startup script (runs startx)
+copy_file "$DEV_ENV/env/.vimrc"      "$HOME/.vimrc"            # vimrc config needed one file form base vim-gtk
 
 # Install this script itself into ~/.local/scripts so it's accessible from $PATH
 # on the new machine without needing the repo to be in a specific location.

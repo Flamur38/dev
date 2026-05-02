@@ -2,9 +2,7 @@
 set nocompatible
 set encoding=utf-8
 set number relativenumber     " hybrid: abs on cursor, relative above/below
-" set cursorline
 set scrolloff=8               " keep 8 lines visible above/below cursor
-" set signcolumn=yes
 
 " --- Search
 set ignorecase smartcase      " case-insensitive unless you type uppercase
@@ -17,9 +15,9 @@ set autoindent smartindent
 
 " --- Usability
 set wildmenu wildmode=longest:full,full   " better tab completion in :command
-set hidden                    " switch buffers without saving
+set hidden                                " switch buffers without saving
 set backspace=indent,eol,start
-set clipboard=unnamedplus     " yank goes to system clipboard
+set clipboard=unnamedplus                 " yank goes to system clipboard
 set updatetime=300
 
 " --- Visual

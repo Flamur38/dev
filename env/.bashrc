@@ -60,10 +60,8 @@ NEWLINE_BEFORE_PROMPT=yes
 [ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
 
 
-# PS1='\[\033[38;5;51m\]@bluebox\[\033[38;5;51m\][\[\033[00;38;5;231m\]\w\[\033[38;5;51m\]]\[\033[00m\]\n \[\033[38;5;46m\]$\[\033[00m\] '
-# PS1='\[\033[00;34m\]@bluebox\[\033[00;32m\][\[\033[00;38;5;231m\]\w\[\033[00;32m\]]\[\033[00m\]\n \[\033[00;32m\]$\[\033[00m\] '
 
-PS1='\[\033[00;36m\]@bluebox\[\033[00;36m\][\[\033[38;5;231m\]\w\[\033[00;36m\]]\[\033[00m\]\n \[\033[00;33m\]$\[\033[00m\] '
+PS1='\[\033[00;36m\]@bluebox\[\033[00;36m\][\[\033[38;5;231m\]\w\[\033[00;36m\]]\[\033[00m\]\n \[\033[00;31m\]$\[\033[00m\] '
 
 
 unset color_prompt force_color_prompt
@@ -123,3 +121,4 @@ fi
 
 bind 'set completion-ignore-case on'
 
+export PATH=/home/flamy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/flamy/personal/ghostty/zig-out/bin:/home/flamy/.local/apps:/home/flamy/.local/scripts:/home/flamy/.local/bin:/home/flamy/.local/odin/:/opt/zeek/bin

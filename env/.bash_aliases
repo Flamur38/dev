@@ -17,9 +17,9 @@ alias authlog='sudo tail -f /var/log/auth.log'
 alias apachelog='sudo tail -f /var/log/apache2/access.log'
 
 # ===== Safety =====
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
 
 # ---- common ----
 alias vi='nvim'

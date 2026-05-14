@@ -59,11 +59,17 @@ fi
 NEWLINE_BEFORE_PROMPT=yes
 [ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
 
-PS1='\[\033[38;5;44m\]@bluebox\[\033[38;5;240m\][\[\033[38;5;254m\]\w\[\033[38;5;240m\]]\[\033[0m\]\n\[\033[38;5;196m\]>>>\[\033[0m\] '
+PS1='\[\033[38;5;38m\]@bluebox\[\033[38;5;35m\][\[\033[38;5;231m\]\w\[\033[38;5;35m\]]\[\033[0m\]\n\[\033[38;5;35m\]>>>\[\033[0m\] '
 
-# host white, cyan path, red >>>
-# PS1='\[\033[38;5;254m\]@bluebox\[\033[38;5;240m\][\[\033[38;5;44m\]\w\[\033[38;5;240m\]]\[\033[0m\]\n\[\033[38;5;196m\]>>>\[\033[0m\] '
-
+# get_ip() {
+#   vpn=$(/sbin/ip addr show tun0 2>/dev/null | awk '/inet / {print $2}' | cut -d/ -f1)
+#   if [ -n "$vpn" ]; then
+#     echo "$vpn"
+#   else
+#     /sbin/ip addr show enp87s0 2>/dev/null | awk '/inet / {print $2}' | cut -d/ -f1
+#   fi
+# }
+# PS1='\[\033[38;5;35m\][\[\033[38;5;38m\]$(get_ip)\[\033[38;5;35m\]]\[\033[0m\] \[\033[38;5;38m\]@bluebox\[\033[38;5;35m\][\[\033[38;5;231m\]\w\[\033[38;5;35m\]]\[\033[0m\]\n\[\033[38;5;35m\]>>>\[\033[0m\] '
 
 unset color_prompt force_color_prompt
 

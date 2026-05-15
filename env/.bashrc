@@ -56,19 +56,17 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+[[ $- == *i* ]] && bind 'set enable-bracketed-paste on'
+PS0='\033[0m'
+PS1='\[\033[38;5;196m\]\T\[\033[0m\033[1m\] \[\033[38;5;26m\]flamysec\[\033[0m\033[1m\]:\[\033[38;5;231m\]\W\[\033[0m\]\$\[\033[1m\] '
+
 NEWLINE_BEFORE_PROMPT=yes
 [ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
 
-PS1='\[\033[38;5;196m\]\T\[\033[0m\] \[\033[01;38;5;26m\]flamysec\[\033[0m\]:\[\033[01;38;5;244m\]\W\[\033[0m\]\$ '
-
 unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-    ;;
-*)
     ;;
 esac
 

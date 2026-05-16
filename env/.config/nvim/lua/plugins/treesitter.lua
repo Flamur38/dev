@@ -1,29 +1,27 @@
--- Code Tree Support / Syntax Highlighting
 return {
-  -- https://github.com/nvim-treesitter/nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
-  event = 'VeryLazy',
+  version = false,
+  lazy = false,
+  build = ':TSUpdate',
   dependencies = {
-    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
-  build = ':TSUpdate',
-  opts = {
-    highlight = {
-      enable = true,
-    },
-    indent = { enable = true },
-    auto_install = true, -- automatically install syntax support when entering new file type buffer
-    ensure_installed = {
-      'lua',
-      'python',
-      'bash',
-      'json',
-      'yaml',
-    },
-  },
-  config = function (_, opts)
-    local configs = require("nvim-treesitter.configs")
-    configs.setup(opts)
+  config = function()
+    require('nvim-treesitter.config').setup({
+      ensure_installed = {
+        'lua',
+        'python',
+        'go',
+        'bash',
+        'json',
+        'yaml',
+      },
+      auto_install = true,
+    })
+    vim.api.nvim_create_autocmd('BufEnter', {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
+    })
   end
 }

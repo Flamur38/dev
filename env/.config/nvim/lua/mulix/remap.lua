@@ -6,6 +6,7 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 keymap.set("n", "<leader>fp", vim.cmd.Ex)
+keymap.set("n", "<Esc>", ":noh<CR>", { silent = true })
 
 -- General keymaps
 keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit

@@ -1,0 +1,85 @@
+-- ~/.config/nvim/colors/fl4my.lua
+vim.cmd("hi clear")
+if vim.fn.exists("syntax_on") then
+  vim.cmd("syntax reset")
+end
+vim.g.colors_name = "fl4my"
+
+local hi = function(name, opts)
+  vim.api.nvim_set_hl(0, name, opts)
+end
+
+-- base
+hi("normal",        { fg = "#d0d0ff", bg = "none" })
+-- hi("normal",        { fg = "#4fd07a", bg = "none" })
+hi("normalnc",      { bg = "none" })
+hi("signcolumn",    { bg = "none" })
+hi("endofbuffer",   { fg = "#1a1f2e", bg = "none" })
+
+-- cursor & line
+hi("cursorline",    { bg = "none" })
+hi("cursorlinenr",  { fg = "#4fd07a", bold = true, bg = "none" })
+hi("linenr",        { fg = "#3a4060" })
+
+-- ui
+hi("statusline",    { bg = "none", fg = "#3a4060", bold = true  })
+hi("statuslinenc",  { bg = "none", fg = "#3a4060" })
+hi("winseparator",  { fg = "#2a2f45" })
+hi("visual",        { bg = "#2a3560" })
+hi("search",        { fg = "#0d1117", bg = "#4fd07a" })
+hi("incsearch",     { fg = "#0d1117", bg = "#e3b341" })
+hi("matchparen",    { fg = "#4fd07a", bold = true })
+
+-- pmenu
+hi("pmenu",         { fg = "#4fd07a", bg = "#1e2438" })
+hi("pmenusel",      { fg = "#0d1117", bg = "#4fd07a" })
+
+-- syntax fallback
+hi("comment",       { fg = "#33e634", italic = true }) -- ubuntu
+-- hi("comment",       { fg = "#33e634", italic = true })
+hi("string",        { fg = "#e3b341" })
+hi("number",        { fg = "#e3b341" })
+hi("boolean",       { fg = "#b47fcb" })
+hi("keyword",       { fg = "#b47fcb" })
+hi("conditional",   { fg = "#b47fcb" })
+hi("repeat",        { fg = "#b47fcb" })
+hi("statement",     { fg = "#b47fcb" })
+hi("function",      { fg = "#4fd07a" })
+hi("identifier",    { fg = "#4fd07a" })
+hi("type",          { fg = "#fe89fb" })
+hi("operator",      { fg = "#4fd07a" })
+hi("special",       { fg = "#4fd07a" })
+hi("preproc",       { fg = "#3b858b" })
+hi("delimiter",     { fg = "#4fd07a" })
+
+-- treesitter
+hi("@keyword",                     { fg = "#b47fcb" })
+hi("@keyword.conditional",         { fg = "#b47fcb" })
+hi("@keyword.function",            { fg = "#b47fcb" })
+hi("@keyword.return",              { fg = "#b47fcb" })
+hi("@keyword.import",              { fg = "#3b858b" })
+hi("@keyword.repeat",              { fg = "#b47fcb" })
+hi("@keyword.exception",           { fg = "#b47fcb" })
+hi("@function",                    { fg = "#4fd07a" })
+hi("@function.call",               { fg = "#4fd07a" })
+hi("@function.builtin",            { fg = "#4fd07a" })
+hi("@function.method",             { fg = "#4fd07a" })
+hi("@method",                      { fg = "#4fd07a" })
+hi("@method.call",                 { fg = "#4fd07a" })
+hi("@variable",                    { fg = "#4fd07a" })
+hi("@parameter",                   { fg = "#4fd07a" })
+hi("@string",                      { fg = "#e3b341" })
+hi("@string.escape",               { fg = "#e3b341" })
+hi("@number",                      { fg = "#e3b341" })
+hi("@boolean",                     { fg = "#b47fcb" })
+hi("@comment",                     { fg = "#33e634", italic = true })
+hi("@operator",                    { fg = "#4fd07a" })
+hi("@punctuation.bracket",         { fg = "#4fd07a" })
+hi("@punctuation.delimiter",       { fg = "#4fd07a" })
+hi("@type",                        { fg = "#fe89fb" })
+hi("@type.builtin",                { fg = "#fe89fb" })
+hi("@constant",                    { fg = "#4fd07a" })
+hi("@constant.builtin",            { fg = "#fe89fb" })
+hi("@attribute",                   { fg = "#b47fcb" })
+
+vim.opt.cursorline = false

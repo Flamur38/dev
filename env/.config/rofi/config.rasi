@@ -1,16 +1,16 @@
 * {
-  bg:    #0a0a0a;
-  fg:    #646464;
-  red:   #b42828;
-  dim:   #1a1a1a;
+  bg:    #0d1117;
+  fg:    #cdd9e5;
+  blue:  #58a6ff;
+  dim:   #161b22;
   background-color: transparent;
   text-color:       @fg;
-  font:             "Monospace 35";
+  font:             "JetBrains Mono Semi-Bold 35";
 }
 window {
   background-color: @bg;
   border:           1px;
-  border-color:     @red;
+  border-color:     @blue;
   border-radius:    0px;
   width:            1700px;
   padding:          16px;
@@ -27,13 +27,13 @@ inputbar {
   children:         [ prompt, entry ];
 }
 prompt {
-  text-color:       @red;
+  text-color:       @blue;
   padding:          0 8px 0 0;
 }
 entry {
   text-color:       @fg;
   placeholder:      "search...";
-  placeholder-color: #3a3a3a;
+  placeholder-color: #3d444d;
 }
 listview {
   background-color: transparent;
@@ -48,13 +48,13 @@ element {
 }
 element selected {
   background-color: @dim;
-  text-color:       @red;
+  text-color:       @blue;
 }
 element-icon {
   size:    24px;
   padding: 0 10px 0 0;
 }
 element-text {
-  font: "Monospace 25";
+  font: "JetBrains Mono Semi-Bold 25";
 }
 

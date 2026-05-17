@@ -6,7 +6,7 @@
 # ==========================================================
 
 set $modkey Mod1
-font pango:JetBrainsMono Nerd Font 25
+font pango:Monospace 25
 floating_modifier $modkey
 
 # ==========================================================
@@ -18,22 +18,22 @@ set $left h
 set $right l
 
 # ==========================================================
-# COLORS — fl4my cold palette
+# COLORS — INVESTIGATION PALETTE
 # ==========================================================
-set $bg        #0d1117
-set $bg-alt    #161b22
-set $fg        #cdd9e5
-set $fg-muted  #3d444d
-set $accent    #58a6ff
-set $dim       #21262d
+set $bg        #0a0a0a
+set $bg-alt    #1a1a1a
+set $fg        #646464
+set $fg-muted  #3a3a3a
+set $accent    #b42828
+set $dim       #1a1a1a
 
 # ==========================================================
 # WINDOW COLORS
 # ==========================================================
-client.focused          $accent   $bg-alt   $fg       $accent
+client.focused          $accent   $bg-alt   $fg      $accent
 client.focused_inactive $fg-muted $bg       $fg-muted $fg-muted
 client.unfocused        $fg-muted $bg       $fg-muted $fg-muted
-client.urgent           $accent   $bg-alt   $fg       $accent
+client.urgent           $accent   $bg-alt   $fg      $accent
 
 # ==========================================================
 # APPLICATION LAUNCHERS
@@ -49,6 +49,17 @@ bindsym $modkey+Shift+period exec /usr/bin/flameshot gui
 bindsym $modkey+ctrl+1 exec --no-startup-id firefox
 bindsym $modkey+ctrl+2 exec --no-startup-id nautilus
 bindsym $modkey+ctrl+0 exec --no-startup-id terminator -e 'msfconsole'
+
+# Allow apps (Firefox tabs etc.) to receive Ctrl+number
+# bindsym Ctrl+1 nop
+# bindsym Ctrl+2 nop
+# bindsym Ctrl+3 nop
+# bindsym Ctrl+4 nop
+# bindsym Ctrl+5 nop
+# bindsym Ctrl+6 nop
+# bindsym Ctrl+7 nop
+# bindsym Ctrl+8 nop
+# bindsym Ctrl+9 nop
 
 # ==========================================================
 # VOLUME CONTROL (PipeWire / pactl)
@@ -89,6 +100,14 @@ bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 
 # ==========================================================
 # FAN CONTROL MODE (MS01 — NCT6798D via hwmon5/pwm1)
+# Firmware handles automatic mode — we only override when needed
+#
+# (s) status    — show CPU temp + fan RPMs via dunst
+# (f) full      — force fans to 100% (emergency / stress testing)
+# (a) auto      — restore firmware automatic control
+#
+# Note: SYSTIN/AUXTIN readings over 100°C are uncalibrated
+#       thermistor noise — ignore them. Watch CPUTIN and coretemp.
 # ==========================================================
 set $mode_fan Fan: (s) status, (f) full speed, (a) auto restore
 mode "$mode_fan" {
@@ -202,6 +221,8 @@ bindsym $modkey+r mode "resize"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 bindsym $modkey+m exec --no-startup-id polybar-msg cmd toggle
 
+
+
 # ==========================================================
 # GAPS
 # ==========================================================
@@ -212,7 +233,7 @@ smart_gaps on
 # ==========================================================
 # SYSTEM MODE
 # ==========================================================
-set $Locker i3lock -d -c 0d1117 -f
+set $Locker i3lock -d -c 0a0a0a -f
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot
 mode "$mode_system" {
@@ -256,3 +277,20 @@ exec --no-startup-id feh --bg-scale ~/Pictures/pics/fl4my.png
 exec --no-startup-id xset s off
 exec --no-startup-id xset s noblank
 exec --no-startup-id xset -dpms
+
+
+# # ---------- INSTALL NERD FONTS ---------
+# # example: install JetBrains Mono Nerd Font manually
+# mkdir -p ~/.local/share/fonts
+# cd ~/.local/share/fonts
+# wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+# unzip JetBrainsMono.zip
+# fc-cache -fv
+#
+#
+# font pango:JetBrainsMono Nerd Font 10
+# bar {
+#     font pango:JetBrainsMono Nerd Font 10
+# }Mod+Shift+R
+# ------------------------------------------
+

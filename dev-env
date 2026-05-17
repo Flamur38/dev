@@ -108,7 +108,7 @@ sync_tree "$DEV_ENV/env/.config" "$XDG_CONFIG_HOME"
 sync_tree "$DEV_ENV/env/.local" "$HOME/.local"
 
 # Sync wallpapers/pictures into ~/Pictures
-sync_tree "$DEV_ENV/env/pictures" "$HOME/Pictures"
+sync_tree "$DEV_ENV/env/Pictures" "$HOME/Pictures"
 
 # Sync custom tools (email_tools, etc.) into ~/tools
 sync_tree "$DEV_ENV/env/tools" "$HOME/tools"

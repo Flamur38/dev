@@ -1,14 +1,14 @@
--- ubuntu.lua — based on terminator 'ubuntu' profile
--- bg: #200020  fg: #d0d0ff
+-- black.lua — based on terminator 'default' profile
+-- bg: #000000  fg: system default (white-ish)
 
 vim.cmd("highlight clear")
 if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
-vim.g.colors_name = "ubuntu"
+vim.g.colors_name = "black"
 
 local c = {
-    bg        = "#200020",
-    fg        = "#d0d0ff",
-    -- palette (matches terminator ubuntu)
+    bg        = "#000000",
+    fg        = "#d0cfcc",
+    -- palette (matches terminator default)
     black     = "#171521",
     red       = "#c01c28",
     green     = "#26a269",
@@ -24,14 +24,14 @@ local c = {
     br_blue   = "#2a7bde",
     br_mag    = "#c061cb",
     br_cyan   = "#33c7de",
-    br_white  = "#ffffff",
+    br_white  = "#cdd8da",
     -- extras
     none      = "NONE",
-    comment   = "#7070a0",
-    sel       = "#300040",
-    visual    = "#3a0050",
-    line      = "#280030",
-    border    = "#c061cb",
+    comment   = "#5e5c64",
+    sel       = "#171521",
+    visual    = "#12488b",
+    line      = "#0d0d0d",
+    border    = "#2aa1b3",
 }
 
 local hi = function(group, opts)
@@ -44,7 +44,7 @@ hi("NormalFloat",   { fg = c.fg,       bg = c.black })
 hi("FloatBorder",   { fg = c.border,   bg = c.black })
 hi("Cursor",        { fg = c.bg,       bg = c.fg })
 hi("CursorLine",    { bg = c.line })
-hi("CursorLineNr",  { fg = c.br_mag,   bold = true })
+hi("CursorLineNr",  { fg = c.br_green, bold = true })
 hi("LineNr",        { fg = c.comment })
 hi("SignColumn",    { bg = c.bg })
 hi("ColorColumn",   { bg = c.line })
@@ -56,22 +56,22 @@ hi("TabLine",       { fg = c.comment,  bg = c.black })
 hi("TabLineSel",    { fg = c.fg,       bg = c.bg,    bold = true })
 hi("TabLineFill",   { bg = c.black })
 hi("Pmenu",         { fg = c.fg,       bg = c.black })
-hi("PmenuSel",      { fg = c.bg,       bg = c.br_mag, bold = true })
+hi("PmenuSel",      { fg = c.bg,       bg = c.br_green, bold = true })
 hi("PmenuSbar",     { bg = c.black })
 hi("PmenuThumb",    { bg = c.comment })
 hi("Visual",        { bg = c.visual })
 hi("Search",        { fg = c.bg,       bg = c.br_yellow })
-hi("IncSearch",     { fg = c.bg,       bg = c.br_mag })
+hi("IncSearch",     { fg = c.bg,       bg = c.br_green })
 hi("MatchParen",    { fg = c.br_cyan,  bold = true, underline = true })
 hi("NonText",       { fg = c.comment })
 hi("SpecialKey",    { fg = c.comment })
 hi("Folded",        { fg = c.comment,  bg = c.line })
 hi("FoldColumn",    { fg = c.comment,  bg = c.bg })
 hi("EndOfBuffer",   { fg = c.black })
-hi("Directory",     { fg = c.br_mag })
-hi("Title",         { fg = c.br_mag,   bold = true })
-hi("Question",      { fg = c.br_mag })
-hi("MoreMsg",       { fg = c.magenta })
+hi("Directory",     { fg = c.br_blue })
+hi("Title",         { fg = c.br_green, bold = true })
+hi("Question",      { fg = c.br_green })
+hi("MoreMsg",       { fg = c.green })
 hi("ModeMsg",       { fg = c.fg,       bold = true })
 hi("ErrorMsg",      { fg = c.br_red,   bg = c.bg })
 hi("WarningMsg",    { fg = c.br_yellow })
@@ -87,7 +87,7 @@ hi("Number",        { fg = c.br_red })
 hi("Boolean",       { fg = c.br_red })
 hi("Float",         { fg = c.br_red })
 hi("Identifier",    { fg = c.fg })
-hi("Function",      { fg = c.br_mag,   bold = true })
+hi("Function",      { fg = c.br_blue,  bold = true })
 hi("Statement",     { fg = c.cyan })
 hi("Conditional",   { fg = c.cyan })
 hi("Repeat",        { fg = c.cyan })
@@ -95,10 +95,10 @@ hi("Label",         { fg = c.cyan })
 hi("Operator",      { fg = c.br_cyan })
 hi("Keyword",       { fg = c.cyan,     bold = true })
 hi("Exception",     { fg = c.br_red })
-hi("PreProc",       { fg = c.br_mag })
-hi("Include",       { fg = c.br_mag })
-hi("Define",        { fg = c.br_mag })
-hi("Macro",         { fg = c.br_mag })
+hi("PreProc",       { fg = c.magenta })
+hi("Include",       { fg = c.magenta })
+hi("Define",        { fg = c.magenta })
+hi("Macro",         { fg = c.magenta })
 hi("Type",          { fg = c.br_yellow })
 hi("StorageClass",  { fg = c.yellow })
 hi("Structure",     { fg = c.yellow })
@@ -123,10 +123,10 @@ hi("@variable",             { fg = c.fg })
 hi("@variable.builtin",     { fg = c.br_red,   italic = true })
 hi("@parameter",            { fg = c.fg,       italic = true })
 hi("@function",             { link = "Function" })
-hi("@function.builtin",     { fg = c.br_mag,   italic = true })
-hi("@function.call",        { fg = c.br_mag })
-hi("@method",               { fg = c.br_mag })
-hi("@method.call",          { fg = c.br_mag })
+hi("@function.builtin",     { fg = c.br_blue,  italic = true })
+hi("@function.call",        { fg = c.br_blue })
+hi("@method",               { fg = c.br_blue })
+hi("@method.call",          { fg = c.br_blue })
 hi("@keyword",              { link = "Keyword" })
 hi("@keyword.function",     { fg = c.cyan,     bold = true })
 hi("@keyword.return",       { fg = c.cyan,     bold = true })
@@ -138,7 +138,7 @@ hi("@type",                 { link = "Type" })
 hi("@type.builtin",         { fg = c.yellow,   italic = true })
 hi("@field",                { fg = c.br_cyan })
 hi("@property",             { fg = c.br_cyan })
-hi("@namespace",            { fg = c.br_mag })
+hi("@namespace",            { fg = c.magenta })
 hi("@include",              { link = "Include" })
 hi("@exception",            { link = "Exception" })
 hi("@tag",                  { fg = c.cyan })
@@ -147,12 +147,12 @@ hi("@tag.delimiter",        { fg = c.white })
 hi("@punctuation.bracket",  { fg = c.white })
 hi("@punctuation.delimiter",{ fg = c.white })
 hi("@punctuation.special",  { fg = c.br_cyan })
-hi("@text.uri",             { fg = c.br_mag,   underline = true })
+hi("@text.uri",             { fg = c.br_blue,  underline = true })
 hi("@text.strong",          { bold = true })
 hi("@text.emphasis",        { italic = true })
-hi("@text.title",           { fg = c.br_mag,   bold = true })
+hi("@text.title",           { fg = c.br_green, bold = true })
 hi("@text.literal",         { fg = c.br_green })
-hi("@text.reference",       { fg = c.br_mag })
+hi("@text.reference",       { fg = c.br_blue })
 
 -- ── LSP ───────────────────────────────────────────────────────────────────────
 hi("DiagnosticError",            { fg = c.br_red })

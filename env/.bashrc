@@ -55,24 +55,25 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
+if [ "$color_prompt" = yes ]; then
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;39m\]\$ '
+    PS1='\[\033[01;32m\]fl4mys3c\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ \[\033[01;39m\]'
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
-[[ $- == *i* ]] && bind 'set enable-bracketed-paste on'
-PS0='\033[0m'
-
-# PS1='\[\e[0;2m\]\t \[\e[1;2m\]\W \[\e[0;2m\]$ \[\e[0m\]'
-# PS1='\[\e[0;31m\]\t\[\e[0m\] \[\e[1;2m\]\W \[\e[0;38;5;46m\]$ \[\e[0m\]'
-PS1='\[\e[0;31m\]\t\[\e[0m\] \[\e[1;2m\]\W \[\e[0;32m\]$ \[\e[0m\]'
-
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 NEWLINE_BEFORE_PROMPT=yes
 [ "$NEWLINE_BEFORE_PROMPT" = yes ] && PROMPT_COMMAND="PROMPT_COMMAND=echo"
-
-unset color_prompt force_color_prompt
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-    ;;
-esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

@@ -16,7 +16,7 @@ local c = {
     blue      = "#12488b",
     magenta   = "#a347ba",
     cyan      = "#2aa1b3",
-    white     = "#d0cfcc",
+    white     = "#d0d0ff",
     br_black  = "#5e5c64",
     br_red    = "#f6614f",
     br_green  = "#33da7a",
@@ -24,7 +24,7 @@ local c = {
     br_blue   = "#2a7bde",
     br_mag    = "#c061cb",
     br_cyan   = "#33c7de",
-    br_white  = "#ffffff",
+    br_white  = "#d0d0ff",
     -- extras
     none      = "NONE",
     comment   = "#7070a0",
@@ -92,7 +92,7 @@ hi("Statement",     { fg = c.cyan })
 hi("Conditional",   { fg = c.cyan })
 hi("Repeat",        { fg = c.cyan })
 hi("Label",         { fg = c.cyan })
-hi("Operator",      { fg = c.br_cyan })
+hi("Operator",      { fg = c.white })
 hi("Keyword",       { fg = c.cyan,     bold = true })
 hi("Exception",     { fg = c.br_red })
 hi("PreProc",       { fg = c.br_mag })
@@ -130,7 +130,7 @@ hi("@method.call",          { fg = c.br_mag })
 hi("@keyword",              { link = "Keyword" })
 hi("@keyword.function",     { fg = c.cyan,     bold = true })
 hi("@keyword.return",       { fg = c.cyan,     bold = true })
-hi("@keyword.operator",     { fg = c.br_cyan })
+hi("@keyword.operator",     { fg = c.white })
 hi("@conditional",          { link = "Conditional" })
 hi("@repeat",               { link = "Repeat" })
 hi("@operator",             { link = "Operator" })

@@ -56,8 +56,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 if [ "$color_prompt" = yes ]; then
+    # default
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;39m\]\$ '
-    PS1='\[\033[01;32m\]fl4mys3c\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ \[\033[01;39m\]'
+
+    # green
+    # PS1='\[\033[01;36m\]fl4mys3c\[\033[00m\]:\[\033[01;38;5;240m\]\W\[\033[00m\]\$ \[\033[1;38;2;88;253;90m\]'
+
+    # sublime custom
+    PS1='\[\033[01;35m\]fl4mys3c\[\033[00m\]:\[\033[01;36m\]\W\[\033[00m\]\$ \[\033[1;38;2;180;186;200m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi

@@ -19,7 +19,7 @@ opt.ignorecase = true           -- Ignore case when searching...
 opt.smartcase = true            -- ...unless capital letters are used
 
 -- Cursor Line
-opt.cursorline = true        -- Highlight the current line (disabled by default)
+opt.cursorline = false        -- Highlight the current line (disabled by default)
 
 -- Appearance
 opt.termguicolors = true        -- Enable 24-bit RGB colors

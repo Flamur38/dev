@@ -5,11 +5,11 @@ opt.relativenumber = true       -- Show relative line numbers
 opt.number = true               -- Show absolute line number on the current line
 
 -- Tabs & Indentation
-opt.tabstop = 4                 -- Number of spaces for a tab
-opt.shiftwidth = 4              -- Number of spaces for autoindent
+opt.tabstop = 2                 -- Number of spaces for a tab
+opt.shiftwidth = 2              -- Number of spaces for autoindent
 opt.expandtab = true            -- Convert tabs to spaces
 opt.smartindent = true          -- Smart autoindenting on new lines
-opt.softtabstop = 4             -- Spaces when pressing tab in insert mode
+opt.softtabstop = 2             -- Spaces when pressing tab in insert mode
 
 -- Line Wrapping
 opt.wrap = false                -- Disable line wrapping

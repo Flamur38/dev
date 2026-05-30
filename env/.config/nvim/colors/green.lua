@@ -59,7 +59,7 @@ hi("Conditional",   { fg = "#b07bc4" })
 hi("Repeat",        { fg = "#b07bc4" })
 hi("Statement",     { fg = "#855492" })           -- return break
 hi("Exception",     { fg = "#855492" })
-hi("Function",      { fg = "#76b28f" })           -- same as fg
+hi("Function",      { fg = "#76b28f", bold = true })           -- same as fg
 hi("Identifier",    { fg = "#76b28f" })
 hi("Type",          { fg = "#76b28f" })
 hi("Operator",      { fg = "#76b28f" })
@@ -70,40 +70,40 @@ hi("Include",       { fg = "#3E7580" })
 hi("SpecialChar",   { fg = "#D8A06A" })
 
 -- treesitter
-hi("@keyword",                     { fg = "#b07bc4" })
-hi("@keyword.conditional",         { fg = "#b07bc4" })
-hi("@keyword.function",            { fg = "#b07bc4" })  -- def
-hi("@keyword.return",              { fg = "#855492" })  -- return
-hi("@keyword.import",              { fg = "#3E7580" })  -- import from
-hi("@keyword.repeat",              { fg = "#b07bc4" })  -- while
-hi("@keyword.exception",           { fg = "#855492" })  -- try except
-hi("@keyword.operator",            { fg = "#b07bc4" })  -- not
-hi("@keyword.coroutine",           { fg = "#b07bc4" })  -- async await
-hi("@function",                    { fg = "#76b28f" })
-hi("@function.call",               { fg = "#76b28f" })
-hi("@function.builtin",            { fg = "#76b28f" })
-hi("@function.method",             { fg = "#76b28f" })
-hi("@method",                      { fg = "#76b28f" })
-hi("@method.call",                 { fg = "#76b28f" })
-hi("@variable",                    { fg = "#76b28f" })
-hi("@variable.builtin",            { fg = "#76b28f" })
-hi("@parameter",                   { fg = "#76b28f" })
-hi("@string",                      { fg = "#D8A06A" })
-hi("@string.escape",               { fg = "#D8A06A" })
-hi("@number",                      { fg = "#D8A06A" })
-hi("@float",                       { fg = "#D8A06A" })
-hi("@boolean",                     { fg = "#D8A06A" })
-hi("@comment",                     { fg = "#16E519", italic = true })
-hi("@operator",                    { fg = "#76b28f" })
-hi("@punctuation.bracket",         { fg = "#76b28f" })
-hi("@punctuation.delimiter",       { fg = "#76b28f" })
-hi("@type",                        { fg = "#76b28f" })
-hi("@type.builtin",                { fg = "#76b28f" })
-hi("@constant",                    { fg = "#76b28f" })
-hi("@constant.builtin",            { fg = "#76b28f" })
-hi("@attribute",                   { fg = "#b07bc4" })
-hi("@property",                    { fg = "#76b28f" })
-hi("@field",                       { fg = "#76b28f" })
-hi("@namespace",                   { fg = "#3E7580" })
+hi("@keyword",                     { fg = "#b07bc4" })           -- if, while, with, as, in
+hi("@keyword.conditional",         { fg = "#b07bc4" })           -- if, elif, else
+hi("@keyword.function",            { fg = "#b07bc4" })           -- def, function
+hi("@keyword.return",              { fg = "#855492" })           -- return
+hi("@keyword.import",              { fg = "#3E7580" })           -- import, from
+hi("@keyword.repeat",              { fg = "#b07bc4" })           -- while, for
+hi("@keyword.exception",           { fg = "#855492" })           -- try, except, raise, finally
+hi("@keyword.operator",            { fg = "#b07bc4" })           -- not, and, or
+hi("@keyword.coroutine",           { fg = "#b07bc4" })           -- async, await
+hi("@function",                    { fg = "#76b28f" })           -- function definitions
+hi("@function.call",               { fg = "#76b28f" })           -- function calls
+hi("@function.builtin",            { fg = "#76b28f", bold = true })           -- print, len, range, ...
+hi("@function.method",             { fg = "#76b28f", bold = true })           -- method definitions
+hi("@method",                      { fg = "#76b28f", bold = true })           -- method definitions (legacy)
+hi("@method.call",                 { fg = "#76b28f", bold = true })           -- method calls
+hi("@variable",                    { fg = "#76b28f" })           -- variables
+hi("@variable.builtin",            { fg = "#76b28f" })           -- self, cls, this
+hi("@parameter",                   { fg = "#76b28f" })           -- function parameters
+hi("@string",                      { fg = "#D8A06A" })           -- "strings"
+hi("@string.escape",               { fg = "#D8A06A" })           -- \n, \t, ...
+hi("@number",                      { fg = "#D8A06A" })           -- 42, 0xFF
+hi("@float",                       { fg = "#D8A06A" })           -- 3.14
+hi("@boolean",                     { fg = "#D8A06A" })           -- true, false
+hi("@comment",                     { fg = "#16E519", italic = true }) -- # comments
+hi("@operator",                    { fg = "#76b28f" })           -- =, +, -, *, /
+hi("@punctuation.bracket",         { fg = "#76b28f" })           -- (, ), [, ], {, }
+hi("@punctuation.delimiter",       { fg = "#76b28f" })           -- ,, ;, .
+hi("@type",                        { fg = "#76b28f" })           -- type names
+hi("@type.builtin",                { fg = "#76b28f", bold = true })           -- int, str, list, dict
+hi("@constant",                    { fg = "#76b28f" })           -- MY_CONST
+hi("@constant.builtin",            { fg = "#76b28f" })           -- None, True, False
+hi("@attribute",                   { fg = "#b07bc4" })           -- @decorator
+hi("@property",                    { fg = "#76b28f" })           -- obj.property
+hi("@field",                       { fg = "#76b28f" })           -- struct fields
+hi("@namespace",                   { fg = "#3E7580" })           -- module names
 
 vim.opt.cursorline = true

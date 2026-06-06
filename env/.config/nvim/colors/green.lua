@@ -81,10 +81,10 @@ hi("@keyword.operator",            { fg = "#b07bc4" })           -- not, and, or
 hi("@keyword.coroutine",           { fg = "#b07bc4" })           -- async, await
 hi("@function",                    { fg = "#76b28f" })           -- function definitions
 hi("@function.call",               { fg = "#76b28f" })           -- function calls
-hi("@function.builtin",            { fg = "#76b28f", bold = true })           -- print, len, range, ...
-hi("@function.method",             { fg = "#76b28f", bold = true })           -- method definitions
-hi("@method",                      { fg = "#76b28f", bold = true })           -- method definitions (legacy)
-hi("@method.call",                 { fg = "#76b28f", bold = true })           -- method calls
+hi("@function.builtin",            { fg = "#76b28f" })           -- print, len, range, ...
+hi("@function.method",             { fg = "#76b28f" })           -- method definitions
+hi("@method",                      { fg = "#76b28f" })           -- method definitions (legacy)
+hi("@method.call",                 { fg = "#76b28f" })           -- method calls
 hi("@variable",                    { fg = "#76b28f" })           -- variables
 hi("@variable.builtin",            { fg = "#76b28f" })           -- self, cls, this
 hi("@parameter",                   { fg = "#76b28f" })           -- function parameters
@@ -98,7 +98,7 @@ hi("@operator",                    { fg = "#76b28f" })           -- =, +, -, *, 
 hi("@punctuation.bracket",         { fg = "#76b28f" })           -- (, ), [, ], {, }
 hi("@punctuation.delimiter",       { fg = "#76b28f" })           -- ,, ;, .
 hi("@type",                        { fg = "#76b28f" })           -- type names
-hi("@type.builtin",                { fg = "#76b28f", bold = true })           -- int, str, list, dict
+hi("@type.builtin",                { fg = "#76b28f" })           -- int, str, list, dict
 hi("@constant",                    { fg = "#76b28f" })           -- MY_CONST
 hi("@constant.builtin",            { fg = "#76b28f" })           -- None, True, False
 hi("@attribute",                   { fg = "#b07bc4" })           -- @decorator

@@ -160,6 +160,18 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Monitor output assignments
+workspace $ws1 output DP-3
+workspace $ws2 output DP-3
+workspace $ws3 output DP-3
+workspace $ws4 output DP-3
+workspace $ws5 output DP-3
+workspace $ws6 output HDMI-1
+workspace $ws7 output HDMI-1
+workspace $ws8 output HDMI-1
+workspace $ws9 output HDMI-1
+workspace $ws10 output HDMI-1
+
 bindsym $modkey+1 workspace $ws1
 bindsym $modkey+2 workspace $ws2
 bindsym $modkey+3 workspace $ws3
@@ -249,7 +261,10 @@ exec --no-startup-id picom
 exec --no-startup-id nm-applet
 exec --no-startup-id flameshot
 exec --no-startup-id numlockx on
-exec --no-startup-id feh --bg-scale ~/Pictures/pics/fl4mys3c_cheatsheet_v2.svg
+exec --no-startup-id feh --bg-scale ~/Pictures/pics/fl4mys3c_cheatsheet_v2.svg \
+                         --bg-scale ~/Pictures/pics/code.jpg
+exec --no-startup-id xrandr --output DP-3 --primary --mode 3840x2560 --rotate normal --pos 0x0 --output HDMI-1 --mode 1920x1080 --rotate left --scale 2x2 --pos 3840x0
+                      
 # exec --no-startup-id vmware-user
 
 # Disable screen blanking

@@ -1,5 +1,5 @@
 # ===== System =====
-alias ll='ls -lh'
+alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 alias cls='clear'
@@ -23,3 +23,4 @@ alias apachelog='sudo tail -f /var/log/apache2/access.log'
 
 # ---- common ----
 alias vi='nvim'
+alias less='less -S'

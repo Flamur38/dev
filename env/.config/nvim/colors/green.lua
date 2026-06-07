@@ -104,6 +104,6 @@ hi("@constant.builtin",            { fg = "#76b28f" })           -- None, True, 
 hi("@attribute",                   { fg = "#b07bc4" })           -- @decorator
 hi("@property",                    { fg = "#76b28f" })           -- obj.property
 hi("@field",                       { fg = "#76b28f" })           -- struct fields
-hi("@namespace",                   { fg = "#3E7580" })           -- module names
+hi("@namespace",                   { fg = "#76b28f" })           -- module names
 
 vim.opt.cursorline = true

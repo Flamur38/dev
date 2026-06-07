@@ -32,26 +32,45 @@
 --   },
 -- }
 
-return {
-    {
-        "kaiuri/nvim-juliana",
-        priority = 1000,
-        lazy = false,
-        config = function()
-            vim.cmd.colorscheme("juliana")
-        end,
-    },
-}
-
--- return{
---   {
---     "folke/tokyonight.nvim",
---     lazy = false,
---     priority = 1000,
---     config = function()
---         vim.cmd("colorscheme tokyonight-storm")
---     end,
---   },
+-- return {
+--     {
+--         "kaiuri/nvim-juliana",
+--         priority = 1000,
+--         lazy = false,
+--         config = function()
+--             vim.cmd.colorscheme("juliana")
+--         end,
+--     },
 -- }
 
+-- return {
+--     "nickkadutskyi/jb.nvim",
+--     lazy = false,
+--     priority = 1000,
+--     opts = {},
+--     config = function()
+--         -- require("jb").setup({transparent = true})
+--         vim.cmd("colorscheme jb")
+--     end,
+-- }
+
+return {
+  {
+    "EdenEast/nightfox.nvim",
+    priority = 1000,
+    config = function()
+      require("nightfox").setup({
+        options = {
+          styles = {
+            comments = "italic",
+            keywords = "bold",
+            types = "italic,bold",
+          },
+        },
+      })
+
+      vim.cmd("colorscheme nightfox")
+    end,
+  },
+}
 

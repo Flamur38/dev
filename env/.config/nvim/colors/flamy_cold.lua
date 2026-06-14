@@ -19,30 +19,30 @@ local c = {
   border      = "#30363d",
   line_nr     = "#3d444d",
   comment     = "#3d444d",
-  fg          = "#cdd9e5",
+  fg          = "#b8c3ce",
   fg_dim      = "#768390",
   fg_inv      = "#0d1117",
 
-  -- Syntax — same role mapping as greeny, cold colors
-  keyword     = "#da8bdf",   -- magenta: if/else/for/while/return …
-  string      = "#D8A06A",   -- warm orange: strings & numbers
-  string_esc  = "#D8A06A",
-  number      = "#D8A06A",
-  func        = "#cdd9e5",   -- blue: functions & methods
-  method      = "#cdd9e5",
-  type        = "#cdd9e5",   -- fg: types / class names
-  type_builtin= "#da8bdf",   -- magenta: built-in types
-  param       = "#cdd9e5",
-  field       = "#cdd9e5",
-  constant    = "#D8A06A",
-  operator    = "#cdd9e5",
-  punct       = "#cdd9e5",   -- brackets same color as writing
-  namespace   = "#cdd9e5",   -- teal: imports / modules
-  decorator   = "#da8bdf",
-  label       = "#da8bdf",
-  tag         = "#ff7b72",   -- coral: HTML tags
-  attr        = "#D8A06A",
-  preproc     = "#3E7580",   -- teal: import keyword
+-- Syntax — same role mapping as greeny, cold colors
+keyword      = "#da8bdf",   -- magenta — if / else / for / while / return, control flow
+string       = "#D8A06A",   -- warm orange — string literals ("...")
+string_esc   = "#D8A06A",   -- warm orange — escape sequences inside strings (\n, \t)
+number       = "#D8A06A",   -- warm orange — numeric literals (42, 3.14)
+func         = "#b8c3ce",   -- fg grey-blue — function definitions & calls
+method       = "#b8c3ce",   -- teal — object/struct methods (obj.method())
+type         = "#b8c3ce",   -- fg grey-blue — user types / class names
+type_builtin = "#da8bdf",   -- magenta — built-in types (int, str, bool …)
+param        = "#b8c3ce",   -- fg grey-blue — function parameters
+field        = "#b8c3ce",   -- fg grey-blue — struct/object fields (obj.field)
+constant     = "#D8A06A",   -- warm orange — constants (PI, MAX, true/false …)
+operator     = "#b8c3ce",   -- fg grey-blue — operators (+ - = == && …)
+punct        = "#b8c3ce",   -- fg grey-blue — brackets/punctuation ( ) { } , ;
+namespace    = "#b8c3ce",   -- fg grey-blue — imports / modules / namespaces
+decorator    = "#da8bdf",   -- magenta — decorators / annotations (@something)
+label        = "#da8bdf",   -- magenta — labels (goto targets, loop labels)
+tag          = "#ff7b72",   -- coral — HTML/XML tags (<div>)
+attr         = "#D8A06A",   -- warm orange — HTML/XML attributes (class=, id=)
+preproc      = "#3E7580",   -- dark teal — preprocessor / import keyword (#include, import)
 
   -- UI
   red         = "#ff7b72",
@@ -74,7 +74,7 @@ hi("ColorColumn",     { bg = c.bg_alt,  bold = false })
 hi("VertSplit",       { fg = c.border,  bg = c.bg })
 hi("WinSeparator",    { fg = c.border,  bg = c.bg })
 hi("FloatBorder",     { fg = c.border,  bg = c.bg_panel })
-hi("StatusLine",      { fg = c.fg,      bg = c.bg_panel })
+hi("StatusLine",      { fg = c.fg_dim,      bg = c.bg })
 hi("StatusLineNC",    { fg = c.fg_dim,  bg = c.bg_alt })
 hi("TabLine",         { fg = c.fg_dim,  bg = c.bg_alt })
 hi("TabLineFill",     { bg = c.bg_alt,  bold = false })

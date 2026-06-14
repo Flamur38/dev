@@ -1,3 +1,29 @@
+
+return {
+  {
+    "kaiuri/nvim-juliana",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("nvim-juliana").setup({})
+      vim.cmd("colorscheme juliana")
+      -- transparent bg
+      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+      -- transparent statusline
+-- transparent gutter
+      vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+      vim.api.nvim_set_hl(0, "LineNrAbove", { bg = "none" })
+      vim.api.nvim_set_hl(0, "LineNrBelow", { bg = "none" })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+      vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none" })
+      vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#f97b58", bg = "none", bold = true })
+      vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })
+    end,
+  },
+}
+
 -- ~/.config/nvim/lua/plugins/rose-pine.lua
 
 -- return {
@@ -8,8 +34,8 @@
 --
 --     config = function()
 --       require("rose-pine").setup({
---         variant = "moon", -- main, moon, dawn
---         dark_variant = "moon",
+--         variant = "main", -- main, moon, dawn
+--         dark_variant = "main",
 --
 --         disable_background = true,
 --         disable_float_background = false,
@@ -23,7 +49,7 @@
 --         highlight_groups = {
 --           -- CursorLine = { bg = false },
 --           -- StatusLine = { fg = "text", bg = "base", blend = 10 },
---             StatusLine = { fg = "muted", bg = "none", bold = true },
+--             StatusLine = { fg = "base", bg = "muted", bold = true },
 --         },
 --       })
 --
@@ -32,45 +58,5 @@
 --   },
 -- }
 
--- return {
---     {
---         "kaiuri/nvim-juliana",
---         priority = 1000,
---         lazy = false,
---         config = function()
---             vim.cmd.colorscheme("juliana")
---         end,
---     },
--- }
-
--- return {
---     "nickkadutskyi/jb.nvim",
---     lazy = false,
---     priority = 1000,
---     opts = {},
---     config = function()
---         -- require("jb").setup({transparent = true})
---         vim.cmd("colorscheme jb")
---     end,
--- }
-
-return {
-  {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    config = function()
-      require("nightfox").setup({
-        options = {
-          styles = {
-            comments = "italic",
-            keywords = "bold",
-            types = "italic,bold",
-          },
-        },
-      })
-
-      vim.cmd("colorscheme nightfox")
-    end,
-  },
-}
+-- ~/.config/nvim/lua/plugins/juliana.lua
 

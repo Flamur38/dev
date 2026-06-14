@@ -13,7 +13,7 @@ return {
             return vim.fn['codeium#Clear']()
         end, { expr = true, silent = true })
 
-        vim.keymap.set('i', '<Tab>', function()
+        vim.keymap.set('i', '<C-y>', function()
             return vim.fn['codeium#Accept']()
         end, { expr = true, silent = true })
 

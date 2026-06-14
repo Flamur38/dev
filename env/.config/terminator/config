@@ -2,29 +2,26 @@
 [keybindings]
 [profiles]
   [[default]]
+    visible_bell = True
+    icon_bell = False
     cursor_fg_color = "#000000"
-    cursor_bg_color = "#18b118"
+    cursor_bg_color = "#aaaaaa"
     cursor_color_default = False
     font = JetBrains Mono 20
-    foreground_color = "#18b118"
+    foreground_color = "#d1d7e2"
     show_titlebar = False
-    scrollbar_position = hidden
-    scrollback_lines = 10000
-    palette = "#2e3436:#cc0000:#18b118:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#18b118:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
     use_system_font = False
-    copy_on_selection = True
-  [[default 2]]
+    scrollbar_position = hidden
+  [[green]]
+    visible_bell = True
+    icon_bell = False
     cursor_fg_color = "#000000"
-    cursor_bg_color = "#9ece6a"
+    cursor_bg_color = "#aaaaaa"
     cursor_color_default = False
     font = JetBrains Mono 20
-    foreground_color = "#c0caf5"
+    foreground_color = "#1aff1a"
     show_titlebar = False
-    scrollbar_position = hidden
-    scrollback_lines = 10000
-    palette = "#1a1b26:#f7768e:#9ece6a:#e0af68:#688bd4:#bb9af7:#89ddff:#c0caf5:#444b6a:#f7768e:#9ece6a:#e0af68:#2ac3de:#bb9af7:#7dcfff:#c0caf5"
     use_system_font = False
-    copy_on_selection = True
 [layouts]
   [[default]]
     [[[window0]]]

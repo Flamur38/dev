@@ -28,7 +28,7 @@ require("lazy").setup("plugins", {
   },
 })
 
-vim.cmd("colorscheme flamy_cold") -- <<---- Change theme here black or ubuntu
+-- vim.cmd("colorscheme flamy_sublime") -- <<---- Change theme here black or ubuntu
 
 -- These modules are not loaded by lazy
 require("mulix.set")

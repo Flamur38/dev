@@ -49,6 +49,7 @@ sudo apt install -y \
   polybar \
   tree \
   vim-gtk3 \
+  stow \
 
 # ----------------------------------------
 # Timezone

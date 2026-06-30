@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+DEV_REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET="${TARGET:-$HOME}"
+
+STOW_FOLDERS="${STOW_FOLDERS:-nvim,tmux,zsh,i3,ghostty,polybar,rofi,x11}"
+
+if ! command -v stow &> /dev/null; then
+    echo "stow is not installed. Run: sudo apt install stow"
+    exit 1
+fi
+
+pushd "$DEV_REPO" > /dev/null
+
+for folder in $(echo "$STOW_FOLDERS" | sed "s/,/ /g"); do
+    echo "stow $folder"
+    stow -t "$TARGET" -D "$folder" 2>/dev/null || true
+    stow -t "$TARGET" "$folder"
+done
+
+popd > /dev/null
+
+echo "done. symlinks created from $DEV_REPO into $TARGET"

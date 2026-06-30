@@ -1,87 +1,75 @@
-# 💻  dev-env
+# dev
 
-A modular, portable Bash-based development environment setup. This project helps you quickly configure and personalize your Linux environment with:
+Personal Linux development environment for Ubuntu 24.04 + i3, managed with GNU Stow.
+Each top-level folder is a stow package that mirrors its target path under `$HOME` — symlinked, not copied, so editing a file in this repo edits the live config directly.
 
-- ⚙️ i3 Window Manager
-- 🧠 Neovim (Lua-based config)
-- 📊 i3status
-- 🧵 Tmux
-- 🐚 ZSH
-- 🛠️ Tools & CLI utilities
+## Stack
 
----
+- i3 window manager + polybar + rofi
+- Neovim (lazy.nvim, custom colorschemes, LSP)
+- tmux
+- zsh + oh-my-zsh
+- ghostty (terminal)
 
-## 📁 Project Structure
+## Repo structure
+~/projects/dev/
+├── install              # stow loop — symlinks everything into $HOME
+├── run                  # runner for runs/ scripts
+├── runs/                # first-time install scripts (packages, tools)
+├── nvim/.config/nvim/
+├── tmux/.tmux.conf
+├── zsh/.zshrc
+│   └── .zsh_profile
+├── i3/.config/i3/
+├── ghostty/.config/ghostty/
+├── polybar/.config/polybar/
+├── rofi/.config/rofi/
+└── x11/.xinitrc, .xprofile, .Xresources
 
-```bash
-.
-├── configs/            # Dotfiles and configuration folders
-│   ├── .config/
-│   │   ├── i3/
-│   │   ├── i3status/
-│   │   └── nvim/
-│   ├── .tmux.conf
-│   ├── .xinitrc
-│   ├── .xprofile
-│   ├── .Xresources
-│   ├── .zsh_profile
-│   └── .zshrc
-├── dev-env/            # (Reserved for shared logic/scripts)
-├── run/                # (Optional: single-run setup logic)
-└── runs/               # Setup scripts for individual components
-    ├── i3-rofi
-    ├── neovim
-    ├── tmux
-    ├── tools
-    └── zsh
-```
+## Home directory layout
+~
+├── projects/            # long-lived dev work
+│   ├── dev/             # this repo
+│   ├── Python/          # python learning (Flamur38/Python)
+│   └── harpoon/         # neovim plugin reference
+├── lab/                 # blue-team exercises (HTB, BTL1, pcaps, evtx)
+│   ├── notes/
+│   ├── tools/
+│   └── transfer/
+└── .dev-personal/       # private — notes, env vars, sensitive config
 
----
-
-## Getting Started
-
-Clone the repo:
+## Setup on a new machine
 
 ```bash
-git clone https://github.com/Flamur38/dev.git
-cd BASH 
+sudo apt install git stow
+git clone git@github.com:Flamur38/dev.git ~/projects/dev
+cd ~/projects/dev
+
+# install packages and tools
+./run base-system
+
+# symlink all configs into $HOME
+./install
 ```
 
-Run the setup scripts
+`install` is idempotent — safe to re-run any time.
+
+## Adding a new config package
 
 ```bash
-chmod +x runs/*
-./runs/tools      # Install core tools
-./runs/zsh        # Setup ZSH and plugins
-./runs/neovim     # Setup Neovim with custom config
-./runs/tmux       # Tmux + config
-./runs/i3-rofi    # i3, i3status, rofi, etc.
+mkdir -p ~/projects/dev/newtool/.config/newtool
+cp -r ~/.config/newtool/* ~/projects/dev/newtool/.config/newtool/
+rm -rf ~/.config/newtool
+stow -d ~/projects/dev -t ~ newtool
 ```
 
----
+Then add `newtool` to `STOW_FOLDERS` in `install`.
 
-## 🛠 Requirements
+## Requirements
 
-- Linux (Debian/Ubuntu-based preferred.)
-- `git`, `curl`, `wget`
-- Superuser privileges (`sudo`)
-
----
-
-## 📦 Coming Soon
-
-- Setup scripts for GNOME, XFCE
-- Optional install flags
-- Testing in Docker.
-
----
+- Ubuntu 24.04 (Debian-based)
+- `git`, `stow`, `curl`
 
 ## License
 
-MIT — do whatever you want, just don’t blame me if it breaks stuff. 😄
-
----
-
-> Made with ❤️ by Flamur
-> Inpired by the great ThePrimeAgen
-# mul1x-dev
+MIT

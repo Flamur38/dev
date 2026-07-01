@@ -7,7 +7,7 @@ Each top-level folder is a stow package that mirrors its target path under `$HOM
 
 - i3 window manager + polybar + rofi
 - Neovim (lazy.nvim, custom colorschemes, LSP)
-- tmux
+- tmux + tmux-sessionizer (prefix+f)
 - zsh + oh-my-zsh
 - ghostty (terminal)
 
@@ -15,11 +15,13 @@ Each top-level folder is a stow package that mirrors its target path under `$HOM
 ~/projects/dev/
 ├── install              # stow loop — symlinks everything into $HOME
 ├── run                  # runner for runs/ scripts
+├── resources/setup      # bootstrap script for fresh machines
 ├── runs/                # first-time install scripts (packages, tools)
+├── bin/.local/bin/      # tmux-sessionizer
+├── git/.gitconfig
 ├── nvim/.config/nvim/
 ├── tmux/.tmux.conf
-├── zsh/.zshrc
-│   └── .zsh_profile
+├── zsh/.zshrc, .zsh_profile
 ├── i3/.config/i3/
 ├── ghostty/.config/ghostty/
 ├── polybar/.config/polybar/
@@ -30,26 +32,19 @@ Each top-level folder is a stow package that mirrors its target path under `$HOM
 ~
 ├── projects/            # long-lived dev work
 │   ├── dev/             # this repo
-│   ├── Python/          # python learning (Flamur38/Python)
-│   └── harpoon/         # neovim plugin reference
+│   └── ...
 ├── lab/                 # blue-team exercises (HTB, BTL1, pcaps, evtx)
-│   ├── notes/
-│   ├── tools/
-│   └── transfer/
+├── work/                # employer repos (added when needed)
 └── .dev-personal/       # private — notes, env vars, sensitive config
 
 ## Setup on a new machine
 
 ```bash
-sudo apt install git stow
-git clone git@github.com:Flamur38/dev.git ~/projects/dev
-cd ~/projects/dev
+# 1. bootstrap — installs deps, clones repo, runs install
+curl -fsSL https://raw.githubusercontent.com/Flamur38/dev/main/resources/setup | bash
 
-# install packages and tools
-./run base-system
-
-# symlink all configs into $HOME
-./install
+# 2. clone private notes (optional)
+git clone git@github.com:Flamur38/dev-personal.git ~/.dev-personal
 ```
 
 `install` is idempotent — safe to re-run any time.
@@ -68,7 +63,7 @@ Then add `newtool` to `STOW_FOLDERS` in `install`.
 ## Requirements
 
 - Ubuntu 24.04 (Debian-based)
-- `git`, `stow`, `curl`
+- `git`, `stow`, `curl`, `fzf`
 
 ## License
 

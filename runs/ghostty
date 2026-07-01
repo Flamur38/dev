@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+log() { echo -e "\n\e[1;36m[ghostty]\e[0m $1"; }
+
+log "Installing Ghostty via mkasberg/ghostty-ubuntu"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+
+log "Verifying install"
+ghostty --version
+
+log "Done — config is managed via stow (ghostty package)"

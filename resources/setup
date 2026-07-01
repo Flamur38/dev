@@ -1,30 +1,31 @@
 #!/usr/bin/env bash
-
-# Run this script before running the ./run 
-
+# Bootstrap script — run this on a fresh machine before anything else.
+# Downloads the repo and runs the full install.
 set -e
 
 echo "[+] Updating system"
 sudo apt update -y
 
-echo "[+] Ensuring git is installed"
-if ! command -v git >/dev/null; then
-    sudo apt install -y git
-fi
+echo "[+] Installing dependencies"
+sudo apt install -y git stow curl fzf
 
-DEV_DIR="$HOME/personal/dev"
+DEV_DIR="$HOME/projects/dev"
 
 echo "[+] Preparing workspace"
-mkdir -p "$HOME/personal"
+mkdir -p "$HOME/projects" "$HOME/lab"
 
 if [ ! -d "$DEV_DIR" ]; then
-    git clone https://github.com/Flamur38/dev "$DEV_DIR"
+    git clone git@github.com:Flamur38/dev.git "$DEV_DIR"
 else
-    echo "[!] Repo already exists, pulling updates"
+    echo "[!] Repo already exists, pulling latest"
     git -C "$DEV_DIR" pull
 fi
 
-echo "[+] Running dev environment installer"
+echo "[+] Installing packages"
 cd "$DEV_DIR"
-chmod +x run
-./run
+./run base-system
+
+echo "[+] Stowing dotfiles"
+./install
+
+echo "[done] Restart your session to apply all changes"

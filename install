@@ -4,7 +4,7 @@ set -e
 DEV_REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET="${TARGET:-$HOME}"
 
-STOW_FOLDERS="${STOW_FOLDERS:-nvim,tmux,zsh,i3,ghostty,polybar,rofi,x11,bin}"
+STOW_FOLDERS="${STOW_FOLDERS:-nvim,tmux,zsh,i3,ghostty,polybar,rofi,x11,bin,git}"
 
 if ! command -v stow &> /dev/null; then
     echo "stow is not installed. Run: sudo apt install stow"

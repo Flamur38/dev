@@ -1,25 +1,37 @@
--- Newer nvim-treesitter uses vim.treesitter directly
--- no longer requires 'nvim-treesitter.configs'
-
+-- nvim-treesitter (main branch): parsers installed via install(),
+-- highlighting started manually per-filetype via autocmd.
+-- The old configs.setup({ highlight = ... }) API is master-branch only.
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",                             -- Pin explicitly so updates don't surprise you
+        lazy = false,
         build = ":TSUpdate",
         config = function()
-            vim.treesitter.language.setup = vim.treesitter.language.setup or function() end
+            require("nvim-treesitter").install({     -- Replaces ensure_installed
+                "lua",
+                "python",
+                "bash",
+                "go",
+                "json",
+                "yaml",
+            })
 
-            require("nvim-treesitter").setup({
-                ensure_installed = {
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = {                          -- Filetypes (not extensions) to highlight
                     "lua",
                     "python",
+                    "sh",                            -- bash parser maps to sh/bash filetypes
                     "bash",
                     "go",
                     "json",
                     "yaml",
                 },
-                highlight = { enable = true },
-                indent = { enable = true },
-                auto_install = true,
+                callback = function(args)
+                    vim.treesitter.start(args.buf)               -- Highlighting (your manual fix, automated)
+                    vim.bo[args.buf].indentexpr =
+                        "v:lua.require'nvim-treesitter'.indentexpr()"  -- Replaces indent = { enable = true }
+                end,
             })
         end,
     },

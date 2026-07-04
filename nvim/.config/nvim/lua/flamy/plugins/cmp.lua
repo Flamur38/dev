@@ -75,14 +75,14 @@ return {
 
                     -- Confirm with Enter — select = false means you must
                     -- explicitly highlight an item before confirming
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+                    ["<C-y>"] = cmp.mapping.confirm({ select = false }),
 
                     -- Confirm with C-y using Replace behavior
                     -- replaces the entire word under cursor instead of appending
-                    ["<C-y>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    }),
+                    -- ["<C-y>"] = cmp.mapping.confirm({
+                    --     behavior = cmp.ConfirmBehavior.Replace,
+                    --     select = true,
+                    -- }),
                 }),
 
                 -- ─── Sources ──────────────────────────────────────────────────

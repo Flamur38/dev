@@ -80,6 +80,24 @@ return {
 
             -- Grep for the word currently under the cursor
             vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep word under cursor" })
+
+
+            -- ─── Keymaps ──────────────────────────────────────────────────────
+            -- vim.keymap.set("n", "<leader>fn", function()
+            --     require("telescope.builtin").find_files({ cwd = "~/.dev-personal/notes" })   -- find note by name
+            -- end)
+            --
+            -- vim.keymap.set("n", "<leader>gn", function()
+            --     require("telescope.builtin").live_grep({ cwd = "~/.dev-personal/notes" })    -- grep inside all notes
+            -- end)
+            --
+            -- vim.keymap.set("n", "<leader>nn", function()
+            --     local name = vim.fn.input("Note name: ")
+            --     if name ~= "" then
+            --         vim.cmd("edit ~/.dev-personal/notes/" .. name .. ".md")                  -- .md added automatically
+            --     end
+            -- end)
+
         end,
     },
 }

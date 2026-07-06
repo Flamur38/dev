@@ -1,31 +1,30 @@
 # fl4my — matches fl4my_green nvim palette
 # bg:      #0C0D21  dark navy
-# fg:      #76b28f  green #7BEB7A
-# fg:      #7BEB7A  green 
+# green:   #16b117
 # purple:  #b07bc4
 # orange:  #D8A06A
 # teal:    #3E7580
-# comment: #16E519
 
 palette = 0=#0C0D21
 palette = 1=#ff5555
-palette = 2=#76b28f
+palette = 2=#16b117
 palette = 3=#D8A06A
 palette = 4=#3E7580
 palette = 5=#b07bc4
-palette = 6=#16E519
+palette = 6=#16b117
 palette = 7=#c5c8c6
 palette = 8=#1e1f35
 palette = 9=#ff5555
-palette = 10=#76b28f
+palette = 10=#16b117
 palette = 11=#D8A06A
 palette = 12=#3E7580
 palette = 13=#855492
 palette = 14=#3E7580
 palette = 15=#ffffff
 
-foreground = #7BEB7A 
+foreground = #16b117
+
 background = #000000
-cursor-color = #76b28f
+cursor-color = #16b117
 selection-foreground = #0C0D21
-selection-background = #76b28f
+selection-background = #16b117

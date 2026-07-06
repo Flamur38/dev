@@ -6,6 +6,6 @@ shell-integration-features = no-cursor,no-sudo,no-title
 gtk-titlebar = false
 keybind = ctrl+enter=unbind
 
-font-family = JetBrains Mono
-font-style = Medium
-font-style-bold = Bold
+# font-family = JetBrains Mono
+# font-style = Medium
+# font-style-bold = Bold

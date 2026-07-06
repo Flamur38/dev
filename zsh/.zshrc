@@ -8,7 +8,16 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+
+# PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b$ '; zle_highlight=('default:bold,fg=#56fd50')
+
+autoload -Uz vcs_info                                    # load the vcs_info function
+precmd() { vcs_info }                                    # run it before each prompt
+zstyle ':vcs_info:git:*' formats ' %F{#D8A06A}(%b)%f'   # branch in your orange, in parens
+setopt PROMPT_SUBST                                      # allow variables in PROMPT
+
+PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b${vcs_info_msg_0_}$ '; zle_highlight=('default:bold,fg=#56fd50')
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

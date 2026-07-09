@@ -12,24 +12,33 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b$ '; zle_highlight=('default:bold,fg=#56fd50')
 
+
+
 # --- PROMPT Theme (NightOps)
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
 setopt PROMPT_SUBST
 
+# Git detection
 zstyle ':vcs_info:git:*' check-for-changes true
 
-# git:(branch)
-zstyle ':vcs_info:git:*' formats ' %F{#66788D}git:(%F{#E06C75}%b%F{#66788D})%f'
+# Show only unstaged changes
 zstyle ':vcs_info:*' unstagedstr ' %F{#E6B46C}✗%f'
+
+# git:(branch)
+zstyle ':vcs_info:git:*' formats ' %F{#66788D}git:(%B%F{#E06C75}%b%f%B%F{#66788D})%f%u'
 
 # Prompt
 PROMPT='%(?:%F{#78C2A4}➜%f  :%F{#E06C75}➜%f  )%B%F{#63C5D8}%1~%f%b${vcs_info_msg_0_} '
 
+# Highlight typed command
 zle_highlight=('default:bold,fg=#D7DFEA')
 
 # ---
+
+
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

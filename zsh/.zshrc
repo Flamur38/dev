@@ -12,12 +12,24 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b$ '; zle_highlight=('default:bold,fg=#56fd50')
 
-autoload -Uz vcs_info                                    # load the vcs_info function
-precmd() { vcs_info }                                    # run it before each prompt
-zstyle ':vcs_info:git:*' formats ' %F{#D8A06A}(%b)%f'   # branch in your orange, in parens
-setopt PROMPT_SUBST                                      # allow variables in PROMPT
+# --- PROMPT Theme (NightOps)
 
-PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b${vcs_info_msg_0_}$ '; zle_highlight=('default:bold,fg=#56fd50')
+autoload -Uz vcs_info
+precmd() { vcs_info }
+setopt PROMPT_SUBST
+
+zstyle ':vcs_info:git:*' check-for-changes true
+
+# git:(branch)
+zstyle ':vcs_info:git:*' formats ' %F{#66788D}git:(%F{#E06C75}%b%F{#66788D})%f'
+zstyle ':vcs_info:*' unstagedstr ' %F{#E6B46C}✗%f'
+
+# Prompt
+PROMPT='%(?:%F{#78C2A4}➜%f  :%F{#E06C75}➜%f  )%B%F{#63C5D8}%1~%f%b${vcs_info_msg_0_} '
+
+zle_highlight=('default:bold,fg=#D7DFEA')
+
+# ---
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

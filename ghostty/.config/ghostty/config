@@ -1,11 +1,14 @@
-theme = fl4my
-background = 000000
+theme = nightops
+
+background = #060B13
 background-blur = false
+
 confirm-close-surface = false
 shell-integration-features = no-cursor,no-sudo,no-title
 gtk-titlebar = false
+
 keybind = ctrl+enter=unbind
 
-# font-family = JetBrains Mono
+font-family = JetBrains Mono
 # font-style = Medium
 # font-style-bold = Bold

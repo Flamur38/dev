@@ -32,6 +32,6 @@ require("lazy").setup({
     { import = "flamy.plugins.harpoon" },
     { import = "flamy.plugins.lsp" },
     { import = "flamy.plugins.cmp" },       -- autocompletion
-    { import = 'flamy.plugins.render-markdown' }, -- Markdown
+    -- { import = 'flamy.plugins.render-markdown' }, -- Markdown
 })
 -- Each { import = "..." } tells lazy.nvim to load that file as a plugin spec

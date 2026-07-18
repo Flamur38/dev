@@ -1,6 +1,7 @@
-theme = nightops
+theme = myTheme
 
-background = #060B13
+# background = #060B13
+background = #000000
 background-blur = false
 
 confirm-close-surface = false

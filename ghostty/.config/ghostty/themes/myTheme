@@ -1,0 +1,37 @@
+# myTheme
+#
+# Matches the NightOps Neovim colorscheme.
+#
+# bg        : #060B13
+# fg        : #D7DFEA
+# comment   : #66788D
+# keyword   : #AF8BE8
+# string    : #E6B46C
+# number    : #D89C61
+# type      : #8AA8CF
+
+palette = 0=#060B13
+palette = 1=#E06C75
+palette = 2=#8FB39A
+palette = 3=#E6B46C
+palette = 4=#63C5D8
+palette = 5=#AF8BE8
+palette = 6=#7DAFBE
+palette = 7=#D7DFEA
+
+palette = 8=#66788D
+palette = 9=#F07B84
+palette = 10=#A3C8AF
+palette = 11=#F0C57B
+palette = 12=#7DD3E6
+palette = 13=#C0A0F0
+palette = 14=#91C4D4
+palette = 15=#F7FAFC
+
+foreground = #18b118 
+background = #000000
+
+cursor-color = #D7DFEA
+
+selection-foreground = #060B13
+selection-background = #63C5D8 

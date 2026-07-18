@@ -33,7 +33,7 @@ zstyle ':vcs_info:git:*' formats ' %F{#66788D}git:(%B%F{#E06C75}%b%f%B%F{#66788D
 PROMPT='%(?:%F{#78C2A4}➜%f  :%F{#E06C75}➜%f  )%B%F{#63C5D8}%1~%f%b${vcs_info_msg_0_} '
 
 # Highlight typed command
-zle_highlight=('default:bold,fg=#D7DFEA')
+zle_highlight=('default:bold,fg=#5cfd54')
 
 # ---
 

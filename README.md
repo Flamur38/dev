@@ -1,4 +1,4 @@
-# dev 
+# dev    
 
 Personal Linux development environment for Ubuntu 24.04 + i3, managed with GNU Stow.
 Each top-level folder is a stow package that mirrors its target path under `$HOME` — symlinked, not copied, so editing a file in this repo edits the live config directly.

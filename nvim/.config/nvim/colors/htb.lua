@@ -10,17 +10,17 @@ local hi = function(group, opts)
 end
 
 ----------------------------------------------------------
--- HackTheBox Palette
--- bg:       #1a2332  dark navy
+-- Juliana Palette (Sublime Mariana port)
+-- bg:       #0F1623  dark navy
 -- fg:       #a4b1cd  muted blue-grey
--- red:      #ff3e3e  errors, booleans
--- green:    #9fef00  HTB green — strings
--- yellow:   #ffaf00  numbers, warnings
--- blue:     #5cb2ff  types, imports
--- purple:   #c16cfa  keywords
--- cyan:     #2ee7b6  functions
+-- red:      #EC5F66  errors, booleans
+-- green:    #99C794  strings
+-- orange:   #F97B58  numbers
+-- blue:     #5C99D6  functions, types, imports
+-- purple:   #C695C6  keywords
+-- cyan:     #5FB4B4  methods
 -- dim:      #313f55  selection, borders
--- grey:     #666666  comments
+-- comment:  #46525C  comments
 ----------------------------------------------------------
 
 local c = {
@@ -30,28 +30,28 @@ local c = {
     visual     = "#313f55",
 
     fg         = "#a4b1cd",
-    fg_dim     = "#666666",
+    fg_dim     = "#46525C",
 
-    comment    = "#666666",
+    comment    = "#46525C",
 
-    keyword    = "#c16cfa",           -- purple — if, while, for, def
-    keyword2   = "#9f00ff",           -- dim purple — return, break, raise
+    keyword    = "#C695C6",           -- purple — if, while, for, def
+    keyword2   = "#A67DB8",           -- dim purple — return, break, raise
 
-    string     = "#9fef00",           -- HTB green — strings
-    number     = "#ffaf00",           -- yellow — numbers
-    type       = "#5cb2ff",           -- bright blue — types, imports
-    func       = "#5cb2ff",           -- bright blue — functions
-    builtin    = "#5cb2ff",           -- blue — builtins print
+    string     = "#99C794",           -- green — strings
+    number     = "#F97B58",           -- orange — numbers
+    type       = "#5C99D6",           -- blue — types, imports
+    func       = "#5C99D6",           -- blue — functions
+    builtin    = "#5C99D6",           -- blue — builtins, print
 
     border     = "#313f55",
     gutter     = "#313f55",
 
-    red        = "#ff3e3e",
-    orange     = "#ffaf00",
-    green      = "#9fef00",
-    blue       = "#5cb2ff",
-    cyan       = "#2ee7b6",
-    purple     = "#c16cfa",
+    red        = "#EC5F66",
+    orange     = "#F97B58",
+    green      = "#99C794",
+    blue       = "#5C99D6",
+    cyan       = "#5FB4B4",
+    purple     = "#C695C6",
 }
 
 ----------------------------------------------------------
@@ -79,7 +79,7 @@ hi("Visual",          { bg = c.visual })
 hi("Pmenu",           { fg = c.fg,      bg = c.bg_popup })
 hi("PmenuSel",        { fg = c.bg,      bg = c.cyan })
 
-hi("Search",          { fg = c.bg,      bg = c.yellow })
+hi("Search",          { fg = c.bg,      bg = c.orange })
 hi("IncSearch",       { fg = c.bg,      bg = c.green })
 
 hi("MatchParen",      { fg = c.cyan,    bold = true })
@@ -186,3 +186,6 @@ hi("TelescopeSelection",  { bg = c.bg_alt })
 hi("TelescopeMatching",   { fg = c.green })
 
 vim.opt.cursorline = true
+
+-- netrw / file explorer
+hi("Directory", { fg = "#5C99D6", bold = true })

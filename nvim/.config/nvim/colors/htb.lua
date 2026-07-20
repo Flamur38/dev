@@ -41,7 +41,7 @@ local c = {
     number     = "#ffaf00",           -- yellow — numbers
     type       = "#5cb2ff",           -- bright blue — types, imports
     func       = "#5cb2ff",           -- bright blue — functions
-    builtin    = "#5cecc6",           -- bright cyan — builtins
+    builtin    = "#5cb2ff",           -- blue — builtins print
 
     border     = "#313f55",
     gutter     = "#313f55",
@@ -140,9 +140,9 @@ hi("@field",                  { fg = c.fg })
 hi("@function",               { fg = c.func,    bold = true })
 hi("@function.call",          { fg = c.func,    bold = true })
 hi("@function.builtin",       { fg = c.builtin, bold = true })
-hi("@function.method",        { fg = c.func,    bold = true })
-hi("@method",                 { fg = c.func,    bold = true })
-hi("@method.call",            { fg = c.func,    bold = true })
+hi("@function.method",        { fg = c.cyan,    bold = true })
+hi("@method",                 { fg = c.cyan,    bold = true })
+hi("@method.call",            { fg = c.cyan,    bold = true })
 
 hi("@keyword",                { fg = c.keyword })
 hi("@keyword.return",         { fg = c.keyword2 })

@@ -38,7 +38,7 @@ client.urgent           $accent   $bg-alt   $fg       $accent
 # ==========================================================
 # APPLICATION LAUNCHERS
 # ==========================================================
-bindsym $modkey+Return exec --no-startup-id ghostty
+bindsym $modkey+Return exec --no-startup-id terminator
 bindsym $modkey+d exec --no-startup-id rofi -show run
 bindsym $modkey+q kill
 bindsym $modkey+Shift+period exec /usr/bin/flameshot gui

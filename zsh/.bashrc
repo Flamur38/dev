@@ -43,41 +43,14 @@ bind 'set completion-ignore-case on'
 
 export PATH=/home/flamy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/flamy/.local/apps:/home/flamy/.local/scripts:/home/flamy/.local/odin/:/opt/zeek/bin
 
-# ======================
-# PS1 — juliana palette
-# brackets: #46525C dim
-# time:     #F97B58 orange
-# path:     #5C99D6 blue
-# dirty:    #C695C6 purple *
-# $:        #99C794 green / #EC5F66 red
-# ======================
-__git_dirty() {
-    local unpushed
-    unpushed=$(git log @{u}.. 2>/dev/null | wc -l)
-    local dirty
-    dirty=$(git status --porcelain 2>/dev/null | wc -l)
-    if [[ "$unpushed" -gt 0 ]] || [[ "$dirty" -gt 0 ]]; then
-        echo " \[\e[38;2;198;149;198m\]*\[\e[0m\]"
-    fi
-}
+set_prompt() {
+  # local muted='\[\e[1;38;2;166;172;185m\]'      # fg3     #a6acb9
+  local muted='\[\e[1;38;5;242m\]'      # fg3     #a6acb9
+  local blue='\[\e[1;38;2;92;153;214m\]'        # blue2   #5c99d6
+  local green='\[\e[1;32m\]'                    # red1    #c76b70
+  local text='\[\e[1;38;2;216;222;233m\]'       # fg2     #d8dee9
+  local reset='\[\e[0m\]'
 
-__flamy_ps1() {
-    local exit_code=$?
-    local bracket="\[\e[38;2;153;199;148m\]"
-    local reset="\[\e[0m\]"
-    local time="\[\e[38;2;249;123;88m\]\@\[\e[0m\]"
-    local path="\[\e[1;38;2;92;153;214m\]\W\[\e[0m\]"
-    local dirty=""
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
-        dirty=$(__git_dirty)
-    fi
-    local dollar
-    if [[ $exit_code -eq 0 ]]; then
-        dollar="\[\e[1;38;2;153;199;148m\]\$\[\e[0m\]"
-    else
-        dollar="\[\e[1;38;2;236;95;102m\]\$\[\e[0m\]"
-    fi
-    PS1="${bracket}[${reset}$time${bracket}:${reset}$path$dirty${bracket}]${reset}$dollar "
+  PS1="${muted}\t ${green}\u${muted}:${blue}\W${muted}\$ ${reset}"
 }
-
-PROMPT_COMMAND=__flamy_ps1
+PROMPT_COMMAND=set_prompt

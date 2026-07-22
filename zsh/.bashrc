@@ -45,7 +45,7 @@ export PATH=/home/flamy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr
 
 set_prompt() {
   # local muted='\[\e[1;38;2;166;172;185m\]'      # fg3     #a6acb9
-  local muted='\[\e[1;38;5;242m\]'      # fg3     #a6acb9
+  local muted='\[\e[1;38;5;244m\]'      # fg3     #a6acb9
   local blue='\[\e[1;38;2;92;153;214m\]'        # blue2   #5c99d6
   local green='\[\e[1;32m\]'                    # red1    #c76b70
   local text='\[\e[1;38;2;216;222;233m\]'       # fg2     #d8dee9

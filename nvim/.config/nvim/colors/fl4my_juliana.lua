@@ -31,6 +31,9 @@ local c = {
   fg3          = "#a6acb9", -- comments, muted
   fg4          = "#46525c", -- nontext, whitespace
   line_nr      = "#848b95", -- line numbers
+  bar          = "#a5acb9", -- statusline background
+  bar_nc       = "#8b929e", -- statusline background (inactive)
+  bar_fg       = "#141a1f", -- statusline text
   text_fg      = "#d9d9d9",
 
   blue1        = "#95b2d6", -- soft blue
@@ -87,8 +90,8 @@ hl("PmenuSel",      { fg = c.fg1, bg = c.bg1, bold = true })
 hl("PmenuSbar",     { bg = c.bg3 })
 hl("PmenuThumb",    { bg = c.bg1 })
 hl("WildMenu",      { fg = c.bg2, bg = c.blue2 })
-hl("StatusLine",    { fg = c.fg2, bg = c.bg3 })
-hl("StatusLineNC",  { fg = c.fg3, bg = c.bg3 })
+hl("StatusLine",    { fg = c.bar_fg, bg = c.bar })
+hl("StatusLineNC",  { fg = c.bar_fg, bg = c.bar_nc })
 hl("TabLine",       { fg = c.fg3, bg = c.bg3 })
 hl("TabLineSel",    { fg = c.yellow2, bg = c.bg2, bold = true })
 hl("TabLineFill",   { bg = c.bg3 })

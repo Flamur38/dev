@@ -4,22 +4,30 @@
   [[default]]
     visible_bell = True
     icon_bell = False
-    font = JetBrains Mono Medium 20
-    use_system_font = False
-    show_titlebar = False
-    scrollbar_position = hidden
-
-    # juliana / mariana — darkened
     background_color = "#141a1f"
-    foreground_color = "#d8dee9"
-    cursor_color_default = False
     cursor_fg_color = "#232a31"
     cursor_bg_color = "#f9ae58"
-
-    palette = "#2e353e:#c76b70:#99c794:#f9ae58:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#ec5f66:#99c794:#fac761:#95b2d6:#c695c6:#87c7c7:#ffffff"
-
-    bold_is_bright = False
+    cursor_color_default = False
+    font = JetBrains Mono Medium 20
+    foreground_color = "#d8dee9"
+    show_titlebar = False
+    scrollbar_position = hidden
     scrollback_lines = 10000
+    palette = "#2e353e:#c76b70:#99c794:#f9ae58:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#ec5f66:#99c794:#fac761:#95b2d6:#c695c6:#87c7c7:#ffffff"
+    use_system_font = False
+  [[default 2]]
+    visible_bell = True
+    icon_bell = False
+    cursor_fg_color = "#232a31"
+    cursor_bg_color = "#f9ae58"
+    cursor_color_default = False
+    font = JetBrains Mono Medium 20
+    foreground_color = "#d8dee9"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#2e353e:#c76b70:#99c794:#f9ae58:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#ec5f66:#99c794:#fac761:#95b2d6:#c695c6:#87c7c7:#ffffff"
+    use_system_font = False
 [layouts]
   [[default]]
     [[[window0]]]

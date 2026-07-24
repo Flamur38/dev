@@ -1,4 +1,4 @@
-# ~/.bashrc
+
 case $- in
     *i*) ;;
       *) return;;
@@ -43,25 +43,34 @@ bind 'set completion-ignore-case on'
 
 export PATH=/home/flamy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/flamy/.local/apps:/home/flamy/.local/scripts:/home/flamy/.local/odin/:/opt/zeek/bin
 
-# set_prompt() {
-#   # local muted='\[\e[1;38;2;166;172;185m\]'      # fg3     #a6acb9
-#   local muted='\[\e[1;38;5;244m\]'      # fg3     #a6acb9
-#   local blue='\[\e[1;38;2;92;153;214m\]'        # blue2   #5c99d6
-#   local green='\[\e[1;32m\]'                    # red1    #c76b70
-#   local red='\[\e[0;31m\]'                    # red1    #c76b70
-#   local text='\[\e[1;38;2;216;222;233m\]'       # fg2     #d8dee9
-#   local reset='\[\e[0m\]'
+# ── soc prompt ────────────────────────────────────────
+# uses ansi indices, not hex — so it inherits whatever palette the
+# terminal has. on your soc profile that resolves to:
+#   32 green #3dd68c   31 red #ff4d5e   34 blue #3b9eff
+#   36 cyan  #22d3ee   33 amber #ffb020  90 grey #4b5563
 #
-#   PS1="${red}\t ${green}\u${muted}:${blue}\W${muted}\$ ${reset}"
-# }
-# PROMPT_COMMAND=set_prompt
+# colour meaning matches nvim and tmux:
+#   blue = path/structure, cyan = identity/metadata,
+#   amber = needs attention, red = something failed
+__soc_prompt() {
+  local st=$? ref dirty='' gseg='' code='' host=''
 
+  # remote indicator — only renders when you're not on the local box
+  [ -n "$SSH_CONNECTION" ] && host="\[\e[0;36m\]\u@\h "
 
-parse_git_branch() {
-    git branch --show-current 2>/dev/null
+  ref=$(git symbolic-ref -q --short HEAD 2>/dev/null) \
+    || ref=$(git rev-parse --short HEAD 2>/dev/null)
+  if [ -n "$ref" ]; then
+    git diff --quiet --ignore-submodules HEAD 2>/dev/null || dirty='\[\e[0;33m\]✗'
+    gseg=" \[\e[0;90m\]git:(\[\e[0;36m\]${ref}\[\e[0;90m\])${dirty}"
+  fi
+
+  local arrow='\[\e[1;32m\]➜'
+  if [ $st -ne 0 ]; then
+    arrow='\[\e[1;31m\]➜'
+    code=" \[\e[0;31m\]${st}"                      # exit code, only on failure
+  fi
+
+  PS1="${arrow}${code}  ${host}\[\e[1;34m\]\W${gseg}\[\e[0m\] "
 }
-
-PS1='\[\e[38;5;45m\]➜ \
-\[\e[38;5;81m\]\W\
-$(branch=$(parse_git_branch); [[ -n $branch ]] && echo " \[\e[38;5;190m\]git:($branch)")\
-\[\e[0m\] \$ '
+PROMPT_COMMAND="__soc_prompt${PROMPT_COMMAND:+; $PROMPT_COMMAND}"

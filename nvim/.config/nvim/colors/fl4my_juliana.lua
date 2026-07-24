@@ -17,8 +17,8 @@ vim.g.colors_name = "fl4my_juliana"
 
 -- ─── juliana / mariana palette ────────────────────────────────────────────
 local c = {
-  bg1          = "#444e59", -- lightest surface (pmenu sel, borders)
-  bg2          = "#232a31", -- editor background (was #303841)
+  -- bg1          = "#444e59", -- lightest surface (pmenu sel, borders)
+  bg2          = "#23252E", -- editor background (was #303841)
   bg3          = "#2e353e", -- floats, statusline, cursorline
   selection_bg = "#3f4750", -- visual selection
   diff_add     = "#41525a",
@@ -28,7 +28,8 @@ local c = {
 
   fg1          = "#ffffff", -- brightest (titles)
   fg2          = "#d8dee9", -- normal text
-  fg3          = "#a6acb9", -- comments, muted
+  -- fg3          = "#a6acb9", -- comments, muted
+  fg3          = "#05A1F7", -- comments, muted
   fg4          = "#46525c", -- nontext, whitespace
   line_nr      = "#848b95", -- line numbers
   bar          = "#a5acb9", -- statusline background

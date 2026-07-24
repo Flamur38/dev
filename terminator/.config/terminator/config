@@ -4,29 +4,17 @@
   [[default]]
     visible_bell = True
     icon_bell = False
-    background_color = "#141a1f"
-    cursor_fg_color = "#232a31"
-    cursor_bg_color = "#f9ae58"
+    background_color = "#0f1319"
+    foreground_color = "#d6dee8"
+    cursor_fg_color = "#0f1319"
+    cursor_bg_color = "#ffb020"
     cursor_color_default = False
-    font = JetBrains Mono Medium 20
-    foreground_color = "#d8dee9"
+    font = JetBrainsMono Nerd Font Medium 20
     show_titlebar = False
     scrollbar_position = hidden
-    scrollback_lines = 10000
-    palette = "#2e353e:#c76b70:#99c794:#f9ae58:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#ec5f66:#99c794:#fac761:#95b2d6:#c695c6:#87c7c7:#ffffff"
-    use_system_font = False
-  [[default 2]]
-    visible_bell = True
-    icon_bell = False
-    cursor_fg_color = "#232a31"
-    cursor_bg_color = "#f9ae58"
-    cursor_color_default = False
-    font = JetBrains Mono Medium 20
-    foreground_color = "#d8dee9"
-    show_titlebar = False
-    scrollbar_position = hidden
-    scrollback_lines = 10000
-    palette = "#2e353e:#c76b70:#99c794:#f9ae58:#5c99d6:#c695c6:#5fb4b4:#d8dee9:#46525c:#ec5f66:#99c794:#fac761:#95b2d6:#c695c6:#87c7c7:#ffffff"
+    scrollback_lines = 50000
+    bold_is_bright = True
+    palette = "#1a1f27:#ff4d5e:#3dd68c:#ffb020:#3b9eff:#c77dff:#22d3ee:#d6dee8:#4b5563:#ff7a85:#6ee7b7:#ffd166:#7cc0ff:#dda8ff:#67e8f9:#f3f6fa"
     use_system_font = False
 [layouts]
   [[default]]
@@ -36,4 +24,6 @@
     [[[child1]]]
       type = Terminal
       parent = window0
+      profile = default
 [plugins]
+

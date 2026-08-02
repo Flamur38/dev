@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# runs/keyd — install and configure keyd (kernel-level key remapping)
+#
+# Remaps applied (see configs/keyd/default.conf):
+#   Caps Lock   -> Esc on tap, Ctrl on hold
+#   Left Ctrl   -> Caps Lock on tap, Ctrl on hold
+#
+# Works across every keyboard (wildcard match), in TTY, X11 and Wayland.
+# Pairs with the Keychron B1 Pro firmware remap (MO(3) -> Right Ctrl),
+# which is stored on the board itself.
+
+set -euo pipefail
+
+# Resolve repo root regardless of where the script is called from
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+SRC_CONF="$REPO_ROOT/keyd/etc/keyd/default.conf"
+DEST_CONF="/etc/keyd/default.conf"
+
+echo ">>> [keyd] Installing keyd..."
+
+# keyd ships in Ubuntu 25.04+; for 24.04 (noble) use the official PPA.
+if ! dpkg -s keyd >/dev/null 2>&1; then
+    if ! apt-cache policy keyd 2>/dev/null | grep -q Candidate; then
+        echo ">>> [keyd] Adding keyd-team PPA (needed on Ubuntu 24.04)..."
+        sudo add-apt-repository -y ppa:keyd-team/ppa
+        sudo apt update
+    fi
+    sudo apt install -y keyd
+else
+    echo ">>> [keyd] keyd already installed, skipping."
+fi
+
+echo ">>> [keyd] Installing config to $DEST_CONF..."
+sudo mkdir -p /etc/keyd
+sudo cp "$SRC_CONF" "$DEST_CONF"
+
+echo ">>> [keyd] Enabling and starting service..."
+sudo systemctl enable --now keyd
+
+# Apply the (possibly updated) config to the running daemon.
+# NOTE: the Ubuntu package names the binary keyd.rvaiya, not keyd.
+if command -v keyd.rvaiya >/dev/null 2>&1; then
+    sudo keyd.rvaiya reload || sudo systemctl restart keyd
+else
+    sudo systemctl restart keyd
+fi
+
+echo ">>> [keyd] Done."
+echo ">>> [keyd] Verify with:  systemctl status keyd"
+echo ">>> [keyd] Watch keys:   sudo keyd.rvaiya monitor   (Ctrl-C to quit)"
+echo ">>> [keyd]   You should see 'DEVICE: match ... Keyboard', not 'ignoring'."

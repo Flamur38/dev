@@ -9,38 +9,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-
-# PROMPT='%F{red}%*%f %B%F{#5254fc}%n%f%b:%B%F{244}%1~%f%b$ '; zle_highlight=('default:bold,fg=#56fd50')
-
-
-
-# --- PROMPT Theme (NightOps)
-
-autoload -Uz vcs_info
-precmd() { vcs_info }
-setopt PROMPT_SUBST
-
-# Git detection
-zstyle ':vcs_info:git:*' check-for-changes true
-
-# Show only unstaged changes
-zstyle ':vcs_info:*' unstagedstr ' %F{#E6B46C}✗%f'
-
-# git:(branch)
-zstyle ':vcs_info:git:*' formats ' %F{#66788D}git:(%B%F{#E06C75}%b%f%B%F{#66788D})%f%u'
-
-# Prompt
-PROMPT='%(?:%F{#78C2A4}➜%f  :%F{#E06C75}➜%f  )%B%F{#63C5D8}%1~%f%b${vcs_info_msg_0_} '
-
-# Highlight typed command
-zle_highlight=('default:bold,fg=#5cfd54')
-
-# ---
+# ZSH_THEME=""
 
 
 
 
-# Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
@@ -103,6 +76,22 @@ zle_highlight=('default:bold,fg=#5cfd54')
 plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
+
+
+# ── flamy prompt ──────────────────────────────
+autoload -Uz vcs_info
+autoload -Uz colors
+colors
+
+precmd() {
+    vcs_info
+}
+
+zstyle ':vcs_info:git:*' formats ' %F{214}(%b)%f'
+
+# neon green
+PROMPT='%F{#5DE2E7}[m32@ms01]%f %F{#FFB86C}%~%f${vcs_info_msg_0}
+%F{#7E7B92}>>>%f '
 
 # User configuration
 

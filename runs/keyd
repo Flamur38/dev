@@ -2,13 +2,17 @@
 #
 # runs/keyd — install and configure keyd (kernel-level key remapping)
 #
-# Remaps applied (see configs/keyd/default.conf):
+# Remaps applied (see keyd/etc/keyd/default.conf):
 #   Caps Lock   -> Esc on tap, Ctrl on hold
 #   Left Ctrl   -> Caps Lock on tap, Ctrl on hold
 #
 # Works across every keyboard (wildcard match), in TTY, X11 and Wayland.
 # Pairs with the Keychron B1 Pro firmware remap (MO(3) -> Right Ctrl),
 # which is stored on the board itself.
+#
+# On laptops, also installs a libinput quirk so that "disable touchpad
+# while typing" keeps working (keyd's virtual keyboard otherwise confuses
+# libinput's internal/external detection). Skipped on desktops.
 
 set -euo pipefail
 
@@ -17,6 +21,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC_CONF="$REPO_ROOT/keyd/etc/keyd/default.conf"
 DEST_CONF="/etc/keyd/default.conf"
+SRC_QUIRK="$REPO_ROOT/keyd/etc/libinput/local-overrides.quirks"
+DEST_QUIRK="/etc/libinput/local-overrides.quirks"
 
 echo ">>> [keyd] Installing keyd..."
 
@@ -35,6 +41,18 @@ fi
 echo ">>> [keyd] Installing config to $DEST_CONF..."
 sudo mkdir -p /etc/keyd
 sudo cp "$SRC_CONF" "$DEST_CONF"
+
+# --- Laptop touchpad quirk -------------------------------------------------
+# Only needed on machines with a touchpad. Detect one before touching
+# libinput config, so this stays a no-op on the desktop.
+if grep -qiE 'touchpad|synaptics' /proc/bus/input/devices 2>/dev/null; then
+    echo ">>> [keyd] Touchpad detected — installing libinput quirk..."
+    sudo mkdir -p /etc/libinput
+    sudo cp "$SRC_QUIRK" "$DEST_QUIRK"
+else
+    echo ">>> [keyd] No touchpad detected — skipping libinput quirk (desktop)."
+fi
+# ---------------------------------------------------------------------------
 
 echo ">>> [keyd] Enabling and starting service..."
 sudo systemctl enable --now keyd

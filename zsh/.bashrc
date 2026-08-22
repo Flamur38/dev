@@ -67,22 +67,23 @@ __rr_prompt() {
     || ref=$(git rev-parse --short HEAD 2>/dev/null)
 
   if [ -n "$ref" ]; then
-    #        git:( bold blue #729fcf      branch red #cc0000      ) blue #3465a4
-   gseg=" \[\e[38;2;52;101;164m\]git:(\[\e[38;2;204;0;0m\]${ref}\[\e[38;2;52;101;164m\])" 
+    #        git:( Foam/Blue #9ccfd8             branch Love/Red #eb6f92     ) Foam/Blue #9ccfd8
+    gseg=" \[\e[38;2;156;207;216m\]git:(\[\e[38;2;235;111;146m\]${ref}\[\e[38;2;156;207;216m\])" 
+    
     # untracked files count as dirty, same as oh-my-zsh's default
-    #                                                 ✗ yellow #c4a000
-    [ -n "$(git status --porcelain 2>/dev/null)" ] && gseg+=" \[\e[38;2;196;160;0m\]✗"
+    #                                                  ✗ Gold/Yellow #f6c177
+    [ -n "$(git status --porcelain 2>/dev/null)" ] && gseg+=" \[\e[38;2;246;193;119m\]✗"
   fi
 
-  #             bold green #8ae234
-  local arrow='\[\e[38;2;138;226;52m\]➜'
-  #                     bold red #ef2929
-  [ $st -eq 0 ] || arrow='\[\e[38;2;239;41;41m\]➜'
+  #             Pine/Green #31748f
+  local arrow='\[\e[38;2;49;116;143m\]➜'
+  
+  #                               Love/Red #eb6f92
+  [ $st -eq 0 ] || arrow='\[\e[38;2;235;111;146m\]➜'
 
-  #                        dir cyan #06989a
-  PS1="${arrow}  \[\e[1;38;2;6;152;154m\]\W${gseg}\[\e[0m\] "
+  #                     dir Rose/Cyan #ea9a97                               Text/White #e0def4 for input
+  PS1="${arrow}  \[\e[1;38;2;234;154;151m\]\W${gseg}\[\e[0m\] \[\e[1;38;2;224;222;244m\]"
 }
-
 # guard against duplicate entries when .bashrc is re-sourced
 case "$PROMPT_COMMAND" in
   *__rr_prompt*) ;;

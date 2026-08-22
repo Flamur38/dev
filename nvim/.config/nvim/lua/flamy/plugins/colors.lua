@@ -1,7 +1,7 @@
 -- change this line to switch themes:
 --   "tokyonight", "tokyonight-storm", "tokyonight-night",
 --   "tokyonight-moon", "tokyonight-day", "juliana", "rose-pine"
-local DEFAULT = "moon"
+local DEFAULT = "rose-pine"
 
 return {
     {
@@ -43,7 +43,13 @@ return {
         end,
     },
     {
-        "kaiuri/nvim-juliana",                 -- kept as a fallback option
+        "kaiuri/nvim-juliana",
         lazy = true,
+        opts = {
+            colors = {
+                bg2 = "#000000",   -- Normal background -> black
+            },
+        },
+        config = true,
     },
 }

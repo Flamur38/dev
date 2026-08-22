@@ -2,25 +2,15 @@
 [keybindings]
 [profiles]
   [[default]]
-    background_color = "#200020"
-    cursor_fg_color = "#0f1319"
-    cursor_bg_color = "#e95420"
+    visible_bell = True
+    icon_bell = False
+    cursor_fg_color = "#000000"
+    cursor_bg_color = "#e0def4"
     cursor_color_default = False
-    font = JetBrainsMono Nerd Font Medium 20
-    foreground_color = "#d0d0ff"
+    font = JetBrainsMono Nerd Font 20
+    foreground_color = "#e0def4"
     show_titlebar = False
-    scrollback_lines = 50000
-    palette = "#171421:#c01c28:#26a269:#a2734c:#12488b:#a347ba:#2aa1b3:#d0cfcc:#5e5c64:#f66151:#33da7a:#e9ad0c:#2a7bde:#c061cb:#33c7de:#cdd8da"
-    use_system_font = False
-  [[black]]
-    cursor_fg_color = "#0f1319"
-    cursor_bg_color = "#e95420"
-    cursor_color_default = False
-    font = JetBrainsMono Nerd Font Medium 20
-    foreground_color = "#d0d0ff"
-    show_titlebar = False
-    scrollback_lines = 50000
-    palette = "#171421:#c01c28:#26a269:#a2734c:#12488b:#a347ba:#2aa1b3:#d0cfcc:#5e5c64:#f66151:#33da7a:#e9ad0c:#2a7bde:#c061cb:#33c7de:#cdd8da"
+    palette = "#26233a:#eb6f92:#31748f:#f6c177:#9ccfd8:#c4a7e7:#ea9a97:#e0def4:#6e6a86:#eb6f92:#31748f:#f6c177:#9ccfd8:#c4a7e7:#ea9a97:#e0def4"
     use_system_font = False
 [layouts]
   [[default]]
